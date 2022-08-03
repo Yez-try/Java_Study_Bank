@@ -2,15 +2,15 @@ package com.iu.start.accountList;
 
 public class AccountListDTO {
 	
-	private String acId;
+	private long acId;
 	private String acName;
 	private double acRate;
 	private int acSale;
 	
-	public String getAcId() {
+	public long getAcId() {
 		return acId;
 	}
-	public void setAcId(String acId) {
+	public void setAcId(long acId) {
 		this.acId = acId;
 	}
 	public String getAcName() {
