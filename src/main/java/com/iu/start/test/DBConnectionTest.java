@@ -53,14 +53,19 @@ public class DBConnectionTest {
 //			System.out.println("실패");
 //		};
 		
-//		arral = daoal.getList();
-//		for (AccountListDTO d : arral) {
-//			System.out.println(d.getAcId());
-//			System.out.println(d.getAcName());
-//			System.out.println(d.getAcRate());
-//			System.out.println(d.getAcSale());
-//			System.out.println("==================");
-//		}
+		try {
+			arral = daoal.getList();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for (AccountListDTO d : arral) {
+			System.out.println(d.getAcId());
+			System.out.println(d.getAcName());
+			System.out.println(d.getAcRate());
+			System.out.println(d.getAcSale());
+			System.out.println("==================");
+		}
 		
 		//getdetail 과 setchangesale 테스
 		DTOal.setAcId(1659511280341L);
