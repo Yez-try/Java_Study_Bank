@@ -16,16 +16,16 @@
 
 	<!-- Processes application requests -->
 	<servlet>
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
+		<servlet-name>appServlet</servlet-name> <!-- 라이브러리임, 우리가 열 수 없음(컴파일 되어서 들어옴) -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> <!-- 여기로 보냄 -->
+		<init-param> <!-- 뭔가 초기화하는 파라미터 -->
+			<param-name>contextConfigLocation</param-name> <!-- 파라이터이므로 이름 밸류 방식으로 되어있다. -->
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
-	<servlet-mapping>
+	<servlet-mapping> <!-- 루트 주소가 들어왔을 때 앱서블릿으로 보내라 -->
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
