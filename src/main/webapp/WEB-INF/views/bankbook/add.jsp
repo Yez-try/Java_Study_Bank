@@ -10,9 +10,9 @@
 	<h1> 상품 등록 폼</h1>
 	<hr>
 	<form action="./add" method="post"><!-- action역할 체크 -->
-		상품이름 <input type="text" name="acName"><br>
-		이자율 <input type="text" name="acRate"><br>
-		<button type="submit">상품등록</button>
+		상품이름 <input type="text" name="bookname"><br>
+		이자율 <input type="text" name="bookrate"><br>
+		<button type="submit" value="create">상품등록</button>
 	</form>
 </body>
 </html>

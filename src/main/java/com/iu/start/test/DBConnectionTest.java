@@ -2,8 +2,6 @@ package com.iu.start.test;
 
 import java.util.ArrayList;
 
-import com.iu.start.accountList.AccountListDAO;
-import com.iu.start.accountList.AccountListDTO;
 import com.iu.start.bankMembers.BankMembersDAO;
 import com.iu.start.bankMembers.BankMembersDTO;
 
@@ -38,10 +36,10 @@ public class DBConnectionTest {
 //		}
 		
 		
-		AccountListDTO DTOal = new AccountListDTO();
-		ArrayList<AccountListDTO> arral = new ArrayList<AccountListDTO>();
-		
-		AccountListDAO daoal = new AccountListDAO();
+//		AccountListDTO DTOal = new AccountListDTO();
+//		ArrayList<AccountListDTO> arral = new ArrayList<AccountListDTO>();
+//		
+//		AccountListDAO daoal = new AccountListDAO();
 		
 		
 //		DTOal.setAcName("적금이자율이이거면좋겠다");
@@ -53,45 +51,45 @@ public class DBConnectionTest {
 //			System.out.println("실패");
 //		};
 		
-		try {
-			arral = daoal.getList();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		for (AccountListDTO d : arral) {
-			System.out.println(d.getAcId());
-			System.out.println(d.getAcName());
-			System.out.println(d.getAcRate());
-			System.out.println(d.getAcSale());
-			System.out.println("==================");
-		}
-		
-		//getdetail 과 setchangesale 테스
-		DTOal.setAcId(1659511280341L);
-		
-		try {
-			DTOal = daoal.getDetail(DTOal);
-			
-			System.out.println(DTOal.getAcId());
-			System.out.println(DTOal.getAcName());
-			System.out.println(DTOal.getAcRate());
-			System.out.println(DTOal.getAcSale());
-			
-			DTOal.setAcSale(0);
-			
-			int chk = daoal.setChangeSale(DTOal);
-			if(chk==1) {
-				System.out.println("변경완료");
-			}else{
-				System.out.println("변경실패");
-				System.out.println(chk);
-			};
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			arral = daoal.getList();
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		for (AccountListDTO d : arral) {
+//			System.out.println(d.getAcId());
+//			System.out.println(d.getAcName());
+//			System.out.println(d.getAcRate());
+//			System.out.println(d.getAcSale());
+//			System.out.println("==================");
+//		}
+//		
+//		//getdetail 과 setchangesale 테스
+//		DTOal.setAcId(1659511280341L);
+//		
+//		try {
+//			DTOal = daoal.getDetail(DTOal);
+//			
+//			System.out.println(DTOal.getAcId());
+//			System.out.println(DTOal.getAcName());
+//			System.out.println(DTOal.getAcRate());
+//			System.out.println(DTOal.getAcSale());
+//			
+//			DTOal.setAcSale(0);
+//			
+//			int chk = daoal.setChangeSale(DTOal);
+//			if(chk==1) {
+//				System.out.println("변경완료");
+//			}else{
+//				System.out.println("변경실패");
+//				System.out.println(chk);
+//			};
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 		

@@ -1,8 +1,11 @@
 package com.iu.start.bankMembers;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,14 +13,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/member/*") //루트 밑에 멤버로 시작하는 모든 애들은 여기로 와라
 public class MemberController {
 	
+	//
+	@RequestMapping(value = "search", method=RequestMethod.GET)
+	public void search() throws Exception{
+		System.out.println("멤버search페이지");
+	
+	}
+	
+	@RequestMapping(value = "search", method = RequestMethod.POST)
+	public String search(HttpServletRequest request,Model model) throws Exception{
+		System.out.println("멤버list 페이지");
+		
+		BankMembersDAO dao = new BankMembersDAO();
+		
+		ArrayList<BankMembersDTO> arr = dao.getSearchByID(request.getParameter("search"));
+		
+
+		model.addAttribute("mlist", arr);
+		
+		return "member/list";
+	}
+	
 	// 루트/member/login이 들어왔을 때 실행해야 할 메서드를 만들어준다.
 //	@RequestMapping(value = "/member/login") //클래스 상단에 RequestMapping을 해주면 login만 써도 여기로 오게된다.
 	@RequestMapping(value = "login")
 	public String login() {
-		System.out.println("로그인 실행");
+		System.out.println("로그인페이지 실행");
 		
 		return "member/login";
 	} 
+	
+	@RequestMapping(value = "login", method=RequestMethod.POST)
+	public String login(HttpServletRequest request) {
+		System.out.println("로그인db 실행");
+		
+		
+		//"redirect: 다시접속할url주소"
+		
+		return "redirect:../";
+	} 
+	
 	
 	// 메서드명 join (Get)
 	// url주소 루트/member/join
@@ -64,7 +99,7 @@ public class MemberController {
 		}else {
 			System.out.println("가입실패");
 		}
-		return "member/join"; //jsp의 경로명을 작성해준다. 기존과 달리 views아래부터 시작하고 jsp는 생략해준다.
+		return "redirect:./login"; //jsp의 경로명을 작성해준다. 기존과 달리 views아래부터 시작하고 jsp는 생략해준다.
 		// 경로설정 파일은 servlet-context.xml에 있다.
 	}
 

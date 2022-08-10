@@ -1,4 +1,4 @@
-<%@page import="com.iu.start.accountList.AccountListDTO"%>
+<%@page import="com.iu.start.bankbook.BankBookDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 	<!-- 절대경로 -->
 	<a href = "/member/join">Join</a>
 	<br>
-			<% AccountListDTO acDTO = (AccountListDTO) request.getAttribute("detail");
+			<% BankBookDTO acDTO = (BankBookDTO) request.getAttribute("detail");
 			if(acDTO != null){%>
 	<table border = "1">
 		<thead> 
@@ -26,10 +26,10 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><%= acDTO.getAcId()%></td>
-				<td><%= acDTO.getAcName()%></td>
-				<td><%= acDTO.getAcRate()%></td>
-				<td><% if(acDTO.getAcSale()==1){%>
+				<td><%= acDTO.getBooknum()%></td>
+				<td><%= acDTO.getBookname()%></td>
+				<td><%= acDTO.getBookrate()%></td>
+				<td><% if(acDTO.getBooksale()==1){%>
 					판매중
 					<%} else{ %>
 					판매금지
@@ -40,5 +40,7 @@
 			<%}else{%>
 			<h3> 찾는상품이 없습니다. </h3>
 			<%} %>
+	<hr>
+	<a href="./list">리스트 보기</a>
 </body>
 </html>

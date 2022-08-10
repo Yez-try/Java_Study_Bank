@@ -1,4 +1,4 @@
-<%@page import="com.iu.start.accountList.AccountListDTO"%>
+<%@page import="com.iu.start.bankbook.BankBookDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,7 +6,7 @@
     	//스크립틀릿 <% java code작성 % >
     	//HTML에 있는 표현식 <% = 자바변수 또는 값 % > 표현식은 세미콜론을 쓰지 않는다.
     	//이제는 이걸 안쓴다.
-    	ArrayList<AccountListDTO> ar = (ArrayList<AccountListDTO>)request.getAttribute("list");
+    	ArrayList<BankBookDTO> ar = (ArrayList<BankBookDTO>)request.getAttribute("list");
     %>
 <!DOCTYPE html>
 <html>
@@ -28,13 +28,14 @@
 			<th>Name</th><th>Rate</th>
 		</thead>
 		<tbody>
-			<% for(AccountListDTO bankbookDTO:ar){ %>
+			<% for(BankBookDTO bankbookDTO:ar){ %>
 			<tr>
-				<td><a href = "detail?booknum=<%=bankbookDTO.getAcId()%>"> <%= bankbookDTO.getAcName() %></a></td><td><%= bankbookDTO.getAcRate() %></td>
+				<td><a href = "detail?booknum=<%=bankbookDTO.getBooknum()%>"> <%= bankbookDTO.getBookname() %></a></td>
+				<td><%= bankbookDTO.getBookrate() %></td>
 			</tr>			
 			<% } %>
 		</tbody>
 	</table>
-	
+	<a href="./add">상품등록</a>
 </body>
 </html>
