@@ -6,12 +6,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/bankbook/*")
 public class BankBookController {
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(AccountListDTO dto, Model model) throws Exception{
+		System.out.println("bankbook update 실행");
+		
+		AccountListDAO dao = new AccountListDAO();
+		
+		AccountListDTO d = dao.getDetail(dto);
+		
+		model.addAttribute("dto", d);
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(HttpServletRequest request) throws Exception{
+		System.out.println("bankbook update 실행");
+		
+		AccountListDAO dao = new AccountListDAO();
+		AccountListDTO dto = new AccountListDTO();
+		
+		dto.setAcId(Long.parseLong(request.getParameter("booknum")));
+		dto.setAcName(request.getParameter("bookname"));
+		dto.setAcRate(Double.parseDouble(request.getParameter("bookrate")));
+		
+		dao.setUpdate(dto);
+		
+		return "redirect: ./list";
+	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getList(HttpServletRequest request) throws Exception{
@@ -37,6 +65,7 @@ public class BankBookController {
 		acDTO.setAcId(booknum);
 		try {
 			acDTO = dao.getDetail(acDTO);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -6,9 +6,30 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.iu.start.util.DBConnector;
 
 public class AccountListDAO implements ListDAO{
+	
+	public int setUpdate(AccountListDTO dto) throws Exception{
+		Connection con = DBConnector.getConnection();
+		
+		String sql = "update accountlist "
+				+ "set acrate = ?, acname = ? "
+				+ "where acid = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setDouble(1, dto.getAcRate());
+		ps.setString(2, dto.getAcName());
+		ps.setLong(3, dto.getAcId());
+		
+		int chk = ps.executeUpdate();
+		
+		DBConnector.disConnect(ps, con);
+		
+		return chk;
+	}
 	
 	@Override
 	public int setAccountList(AccountListDTO alDTO) throws Exception {
