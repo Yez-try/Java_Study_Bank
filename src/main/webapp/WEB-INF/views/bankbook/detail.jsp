@@ -49,7 +49,8 @@
  --%>
 	<hr>
 	<a href="./list">리스트 보기</a>
- 	<a href="./update?acId=${detail.acId}">수정</a>
+ 	<a href="./update?booknum=${detail.booknum}">수정</a>
+ 	<a href="./delete?booknum=${detail.booknum}">삭제</a>
 
 </body>
 </html>

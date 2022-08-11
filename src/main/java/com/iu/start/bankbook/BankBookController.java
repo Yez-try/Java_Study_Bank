@@ -15,6 +15,51 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/bankbook/*")
 public class BankBookController {
 	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete(BankBookDTO dto) throws Exception{
+		System.out.println("bankbook delete 실행");
+		
+		BankBookDAO dao = new BankBookDAO();
+		
+		int i = dao.delete(dto);
+		
+		if(i==1) {
+			System.out.println("삭제성공");
+		}else {
+			System.out.println("삭제실패");
+		}
+		
+		return "redirect:./list";
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(BankBookDTO dto, Model model) throws Exception{
+		System.out.println("bankbook update 실행");
+		
+		BankBookDAO dao = new BankBookDAO();
+		
+		BankBookDTO d = dao.getDetail(dto);
+		
+		model.addAttribute("dto", d);
+	}
+
+
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(BankBookDTO dto) throws Exception{
+		System.out.println("bankbook update 실행");
+		
+		BankBookDAO dao = new BankBookDAO();
+		
+		int chk = dao.setUpdate(dto);
+		
+		if(chk==1) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+		}
+		return "redirect: ./list";
+	}
+	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getList(Model model) throws Exception{//모델앤뷰의 모델을 매개변수로 받는다.
 		System.out.println("list실행");

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface BookDAO {
 	
+	public int setUpdate(BankBookDTO dto) throws Exception;
+	
 	public int setBankBook(BankBookDTO bankBookDTO)throws Exception;
 	//북넘: 현재시간을 밀리세컨즈로 변환하여 입력
 	//북세일: 1 -판매
