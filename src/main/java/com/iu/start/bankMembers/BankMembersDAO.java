@@ -5,9 +5,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.ui.Model;
+
 import com.iu.start.util.DBConnector;
 
 public class BankMembersDAO implements MembersDAO{
+	
+	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
+		
+		Connection con = DBConnector.getConnection();
+		
+		String sql = "select id, name from bankmembers where id=? and pw=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, dto.getId());
+		ps.setString(2, dto.getPw());
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			dto = new BankMembersDTO();
+			
+			dto.setId(rs.getString("id"));
+			dto.setName(rs.getString("name"));
+		}else {
+			return null;
+		}
+		
+		return dto;
+	}
 
 	@Override
 	public int setJoin(BankMembersDTO bmdto) throws Exception {
