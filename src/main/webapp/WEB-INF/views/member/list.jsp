@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>멤버 리스트</h1>
-	<form action="./search" method="post">
+	<form action="./search.mg" method="post">
 		아이디 <input type="text" name="search">
 		<input type="submit"> 
 	</form>

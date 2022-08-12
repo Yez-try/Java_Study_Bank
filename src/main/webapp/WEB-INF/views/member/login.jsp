@@ -15,7 +15,7 @@
 			//Post 방식으로 주면 : 입력한 정보로 로그인 판단 -->
     <div>
     	<!-- <form action="study/member/login" method="post"></form> -->
-    	<form action="./login" method="post">
+    	<form action="./login.mg" method="post">
         ID  <input type = "text" name = "id" ><br> <!-- 입력한 input태그의 값이 value로 넘어가는데 구분이 어려워서 name속성이 구분해주는 이름(key)임 -->
         PW  <input type = "password" name = "pw"> <br>
         <input type = "submit">

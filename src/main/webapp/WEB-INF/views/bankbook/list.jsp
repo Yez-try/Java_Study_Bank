@@ -22,7 +22,6 @@
 	
 	<!-- /bankbook/detail jsp:detail.jsp -->
 	<!-- link주소는 상대경로로 작성해주세요. -->
-	<a href = "./detail">BankBook Detail</a>
 	<hr>
 	<table border = "1">
 		<thead>
@@ -35,8 +34,8 @@
 			</c:forEach>
 			<c:forEach items="${list }" var="dto">
 				<tr>
-					<td><a href="detail?booknum=${dto.booknum}">${dto.bookname }</a></td>
-					<td>${dot.bookrate }</td>
+					<td><a href="detail.mg?booknum=${dto.booknum}">${dto.bookname }</a></td>
+					<td>${dto.bookrate }</td>
 				</tr>
 			</c:forEach>
 			<%-- <% for(BankBookDTO bankbookDTO:ar){ %>
@@ -48,6 +47,7 @@
 			--%>
 		</tbody>
 	</table>
-	<a href="./add">상품등록</a>
+	<a href="./add.mg">상품등록</a>
+
 </body>
 </html>

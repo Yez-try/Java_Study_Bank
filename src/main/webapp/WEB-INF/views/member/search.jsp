@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>member search페이지</h1>
-	<form action="./search" method="post">
+	<form action="./search.mg" method="post">
 	<input type="text" name = "search">
 	<input type="submit">
 	</form>

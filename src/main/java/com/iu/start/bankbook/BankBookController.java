@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/bankbook/*")
 public class BankBookController {
 	
-	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	@RequestMapping(value = "delete.mg", method = RequestMethod.GET)
 	public String delete(BankBookDTO dto) throws Exception{
 		System.out.println("bankbook delete 실행");
 		
@@ -29,10 +29,10 @@ public class BankBookController {
 			System.out.println("삭제실패");
 		}
 		
-		return "redirect:./list";
+		return "redirect:./list.mg";
 	}
 	
-	@RequestMapping(value = "update", method = RequestMethod.GET)
+	@RequestMapping(value = "update.mg", method = RequestMethod.GET)
 	public void update(BankBookDTO dto, Model model) throws Exception{
 		System.out.println("bankbook update 실행");
 		
@@ -44,7 +44,7 @@ public class BankBookController {
 	}
 
 
-	@RequestMapping(value = "update", method = RequestMethod.POST)
+	@RequestMapping(value = "update.mg", method = RequestMethod.POST)
 	public String update(BankBookDTO dto) throws Exception{
 		System.out.println("bankbook update 실행");
 		
@@ -57,10 +57,10 @@ public class BankBookController {
 		}else {
 			System.out.println("실패");
 		}
-		return "redirect: ./list";
+		return "redirect: ./list.mg";
 	}
 	
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "list.mg", method = RequestMethod.GET)
 	public String getList(Model model) throws Exception{//모델앤뷰의 모델을 매개변수로 받는다.
 		System.out.println("list실행");
 		
@@ -76,7 +76,7 @@ public class BankBookController {
 		return "bankbook/list";
 	}
 	
-	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	@RequestMapping(value = "detail.mg", method = RequestMethod.GET)
 	public ModelAndView detail(String booknum)throws Exception { //신기하게도 이렇게 void로 주면 자동으로 "bankbook/detail.jsp"를 찾아간다.
 		System.out.println("detail실행");
 		System.out.println("booknum:"+booknum);
@@ -97,7 +97,7 @@ public class BankBookController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "add", method = RequestMethod.GET)
+	@RequestMapping(value = "add.mg", method = RequestMethod.GET)
 	public ModelAndView add() {
 		ModelAndView mv = new ModelAndView(); //modelandview를 리턴해도 된다.
 		mv.setViewName("bankbook/add"); //경로명을 꼭 담아주어야한다.
@@ -106,7 +106,7 @@ public class BankBookController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@RequestMapping(value = "add.mg", method = RequestMethod.POST)
 	public ModelAndView add (BankBookDTO dto) throws Exception{
 		System.out.println("상품등록 post 실행");
 		
@@ -118,7 +118,7 @@ public class BankBookController {
 		
 		if(chk==1) {
 			System.out.println("등록 완료");
-			mv.setViewName("redirect:./list");
+			mv.setViewName("redirect:./list.mg");
 			mv.addObject("list", dao.getList());
 			
 		}else {

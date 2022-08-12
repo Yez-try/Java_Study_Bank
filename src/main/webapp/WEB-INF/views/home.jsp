@@ -16,22 +16,24 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<c:if test="${empty member}">
+<c:if test="${empty sessionScope.member}">
 <!-- 로그인이 안됐으면 이게 나오고 -->
-<a href="./member/login">로그인</a><br>
-<a href="member/join">회원가입</a>
+<a href="./member/login.mg">로그인</a><br>
+<a href="member/join.mg">회원가입</a>
 </c:if>
 <!-- 로그인이 됐으면 이게 나온다 ifelse문이 없으므로 단일if문으로 써준다-->
-<c:if test="${not empty member }">
-<a href ="#">Logout</a>
+<c:if test="${not empty sessionScope.member }">
+<h3>${sessionScope.member.name}님 환영합니다.</h3>
+<a href ="./member/logout.mg">Logout</a>
 <a href ="#">My page</a>
 </c:if>
 <hr>
-<a href="./bankbook/list">상품리스트</a>
-<a href="./bankbook/add">상품등록</a>
+<a href="./bankbook/list.mg">상품리스트</a>
+<a href="./bankbook/add.mg">상품등록</a>
+
 <hr>
 
-<a href="./member/search">아이디검색</a>
+<a href="./member/search.mg">아이디검색</a>
 
 </body>
 </html>

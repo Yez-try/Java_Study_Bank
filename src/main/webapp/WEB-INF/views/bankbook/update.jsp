@@ -9,7 +9,7 @@
 <body>
 	<h1> Bankbook update 페이지 </h1>
 	<hr>
-	<form action="" method="post">
+	<form action="update.mg" method="post">
 		<input type="text" name="booknum" readonly="readonly" value=${dto.booknum }> 
 		<!-- <input type="hidden" name="boooknum" value=${dto.booknum }> -->
 		<div>

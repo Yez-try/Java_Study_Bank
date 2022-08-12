@@ -3,24 +3,40 @@ package com.iu.start.bankMembers;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/member/*") //루트 밑에 멤버로 시작하는 모든 애들은 여기로 와라
 public class MemberController {
 	
+	@RequestMapping(value = "logout.mg", method=RequestMethod.GET)
+	public ModelAndView logout(HttpSession session) throws Exception{
+		//로그아웃하는 방법
+		//1. 세션 소멸시키기(추천)
+		//2. 멤버변수 소멸시키기
+		System.out.println("로그아웃페이지");
+		
+		session.invalidate(); //세션 삭제: 세션의 유효시간을 0으로 만듦
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect: ./login.mg");
+		return mv;
+	}
+	
 	//
-	@RequestMapping(value = "search", method=RequestMethod.GET)
+	@RequestMapping(value = "search.mg", method=RequestMethod.GET)
 	public void search() throws Exception{
 		System.out.println("멤버search페이지");
 	
 	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.POST)
+	@RequestMapping(value = "search.mg", method = RequestMethod.POST)
 	public String search(HttpServletRequest request,Model model) throws Exception{
 		System.out.println("멤버list 페이지");
 		
@@ -43,16 +59,18 @@ public class MemberController {
 		return "member/login";
 	} 
 	
-	@RequestMapping(value = "login", method=RequestMethod.POST)
-	public String login(BankMembersDTO dto, Model model) throws Exception {
+	@RequestMapping(value = "login.mg", method=RequestMethod.POST)
+	public String login(HttpSession session /*HttpServletRequest request*/, BankMembersDTO dto, Model model) throws Exception {
 		System.out.println("db에 로그인 실행");
 		
 		BankMembersDAO dao = new BankMembersDAO();
-		dto = dao.getLogin(dto);
-
-		model.addAttribute("member", dto);
-		//"redirect: 다시접속할url주소"
 		
+		dto = dao.getLogin(dto);
+//		model.addAttribute("member", dto); //이렇게 해도 메인페이지에서는 member를 받아오지 못한다. 우리가 리다이렉트로 주소값을 반환하므로
+		
+		//그래서 응답을 해도 없어지지 않는 session 객체에 담아 리턴해준다.
+//		HttpSession session = request.getSession();
+		session.setAttribute("member", dto);
 		
 		
 		System.out.println(dto);
@@ -62,7 +80,7 @@ public class MemberController {
 	
 	// 메서드명 join (Get)
 	// url주소 루트/member/join
-	@RequestMapping(value = "/member/join", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/join.mg", method = RequestMethod.GET)
 	public String join() {
 		System.out.println("회원가입 실행");
 		
@@ -74,7 +92,7 @@ public class MemberController {
 	
 	//join post방식
 	//오버로딩: 매개변수가 달라야하므로, HttpServletRequest request 값을 받아준다.
-	@RequestMapping(value = "/member/join", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/join.mg", method = RequestMethod.POST)
 	public String join(BankMembersDTO dto) throws Exception{
 		System.out.println("회원가입 post 실행");
 		
@@ -105,7 +123,7 @@ public class MemberController {
 		}else {
 			System.out.println("가입실패");
 		}
-		return "redirect:./login"; //jsp의 경로명을 작성해준다. 기존과 달리 views아래부터 시작하고 jsp는 생략해준다.
+		return "redirect:./login.mg"; //jsp의 경로명을 작성해준다. 기존과 달리 views아래부터 시작하고 jsp는 생략해준다.
 		// 경로설정 파일은 servlet-context.xml에 있다.
 	}
 

@@ -13,9 +13,9 @@
 <body>
 	<h1>Join Page</h1>
     <hr>
-    <a href = "study_index.html"> 인덱스 페이지 </a>
+    <a href = "../"> 인덱스 페이지 </a>
     <div>
-    	<form action="./join" method="post">
+    	<form action="./join.mg" method="post">
 	        아이디 <input type = "text" name = "id"><br>
 	        이름 <input type="text" name = "name"><br>
 	        비밀번호 <input type = "password" name = "pw"><br>
