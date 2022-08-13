@@ -26,11 +26,13 @@
 <h3>${sessionScope.member.name}님 환영합니다.</h3>
 <a href ="./member/logout.mg">Logout</a>
 <a href ="#">My page</a>
+
 </c:if>
 <hr>
 <a href="./bankbook/list.mg">상품리스트</a>
 <a href="./bankbook/add.mg">상품등록</a>
-
+<hr>
+<a href ="./board/list.mg">글목록보기</a>
 <hr>
 
 <a href="./member/search.mg">아이디검색</a>
