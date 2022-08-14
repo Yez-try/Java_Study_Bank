@@ -39,6 +39,11 @@ public class BoardController {
 		dto = dao.getDetail(dto);
 		
 		request.setAttribute("board", dto);
+		
+		HttpSession session = request.getSession();
+		
+		int chk = dao.updateViews(dto);
+		System.out.println(chk);
 		return dto;
 	}
 	

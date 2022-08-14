@@ -9,6 +9,21 @@ import com.iu.start.util.DBConnector;
 
 public class BoardDAO {
 	
+	public int updateViews(BoardDTO dto) throws Exception{
+		
+		Connection con = DBConnector.getConnection();
+		
+		String sql = "update board set views = views+1 where no=?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setLong(1, dto.getNo());
+		
+		int chk = ps.executeUpdate();
+		
+		return chk;
+	}
+	
 	public ArrayList<BoardDTO> getList() throws Exception{
 		
 		ArrayList<BoardDTO> arr = new ArrayList<BoardDTO>();
