@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- XML파일은 HTML파일과 유사하다
+		태그로 시작하고 태그로 끝나는데, 태그는 내 마음대로 쓸 수 있다. -->
+	
+	<!-- 객체 생성, 객체 주입 두가지를 할 수 있어야 한다. -->
+	
+	<!-- 객체 생성 -->
+	<!-- 자바에서 engine클래스를 만든다면, 
+		Engine engine = new Engine() 이렇게 쓴다 -->
+	<!-- bean == new 디폴트생성자() 빈은 이렇게 생각하면 된다. -->
+	
+	<bean class="com.iu.start.di.Engine" id ="engine"></bean> <!-- id는 bean의 이름 -->
+	<bean class="com.iu.start.di.LeftWheel" id = "leftWheel"></bean>
+	<bean class="com.iu.start.di.RightWheel" id = "rigthWheel"></bean>
+	<bean class="com.iu.start.di.Car" id="car"> <!-- car는 에러가 뜨는데, 그 이유는 기본으로 디폴트 생성자를 호출해주는데, car에는 디폴트 생성자가 없으므로 -->
+		
+		<constructor-arg index="0" ref="leftWheel"></constructor-arg> <!-- 생성자의 첫번째 매개변수 넣어주기 -->
+		<constructor-arg index="1" ref="rigthWheel"></constructor-arg> <!-- 두번째 매개변수 넣어주기 -->
+<!-- 이름으로 넣기 
+		<constructor-arg name = "leftWheel" ref="leftWheel"></constructor-arg>
+		<constructor-arg name = "rightWheel" ref="rightWheel"></constructor-arg>
+		 -->
+<!-- 타입으로 넣기(같은 타입이 없는 경우에 사용한다 
+		<constructor-arg type="com.iu.start.di.Wheel" ref="leftWheel">
+		-->
+		
+		<!-- setter로 넣어주기 -->
+		<property name="engine" ref="engine"></property>
+	</bean> 
+		
+</beans>
+
+<!-- 하단 Beans Graph를 누르면 구성을 확인할 수 있다. -->

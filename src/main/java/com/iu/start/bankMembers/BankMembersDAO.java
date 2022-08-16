@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.iu.start.util.DBConnector;
 
+@Repository("myDAO")
 public class BankMembersDAO implements MembersDAO{
 	
 	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
