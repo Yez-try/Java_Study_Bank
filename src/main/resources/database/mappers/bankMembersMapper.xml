@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		    
+<!-- namespace의 값은 사용할 DAO의 풀패키지명을 입력해주세요.(중복되면 안되므로) -->		    
+<mapper namespace="com.iu.start.bankMembers.BankMembersDAO">
+	<!-- ID는 DAO의 메서드명과 동일하게 맞춰주세요 -->
+	<select id="getLogin" parameterType="com.iu.start.bankMembers.BankMembersDTO" resultType="com.iu.start.bankMembers.BankMembersDTO">
+		<!-- parameterType ?안에 들어갈 파라메터 타입을 적는다.근데 String은 안됨 -->
+		<!-- #{}안에는 parameterType의 getter의 첫글자를 소문자로 바꿔 적어준다. -->
+		SELECT ID, NAME FROM BANKMEMBERS WHERE ID=#{id} AND PW=#{pw}
+		<!-- resultType은 리턴받을 타입을 넣어준다.
+		 SELECT의 컬럼명과 RETURN받을 변수명이 일치해야 하므로 N개를 받더라도 DTO로 받아준다. -->
+	</select>
+	
+	<select id="getSearchByID" parameterType="String" resultType="com.iu.start.bankMembers.BankMembersDTO">
+		SELECT * FROM BANKMEMBERS where id like '%'||#{search}||'%' order by id asc
+	</select>
+	
+		 
+		 
+		 	<!-- 자바에서 sql을 쓰지 않고 여기서 써준다.
+		 	<select id="">
+		 		SELECT * FROM MEMBERS
+		 	</select>
+		 	<insert id=""></insert>
+		 	<update id=""></update>
+		 	<delete id=""></delete> -->
+</mapper>
+		 
+		 

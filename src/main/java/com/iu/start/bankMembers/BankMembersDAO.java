@@ -5,35 +5,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import com.iu.start.bankAccount.bankAccountDTO;
 import com.iu.start.util.DBConnector;
 
+@Repository
 public class BankMembersDAO implements MembersDAO{
+	
+	@Autowired
+	private SqlSession sqlSession;
+	private final String NAMESPACE = "com.iu.start.bankMembers.BankMembersDAO."; //멤버변수로 String namespace 선언 대입 : 연결하려는 mapper의 namespace속성의 값과 동일한 값, 끝에 . 추가
+	
 	
 	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
 		
-		Connection con = DBConnector.getConnection();
 		
-		String sql = "select id, name from bankmembers where id=? and pw=?";
 		
-		PreparedStatement ps = con.prepareStatement(sql);
-		
-		ps.setString(1, dto.getId());
-		ps.setString(2, dto.getPw());
-		
-		ResultSet rs = ps.executeQuery();
-		
-		if(rs.next()) {
-			dto = new BankMembersDTO();
-			
-			dto.setId(rs.getString("id"));
-			dto.setName(rs.getString("name"));
-		}else {
-			return null;
-		}
-		
-		return dto;
+		return sqlSession.selectOne(NAMESPACE+"getLogin", dto);
 	}
 
 	@Override

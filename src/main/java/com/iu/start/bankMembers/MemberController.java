@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/member/*") //루트 밑에 멤버로 시작하는 모든 애들은 여기로 와라
 public class MemberController {
+	
+	@Autowired
+	private BankMembersService service;
 	
 	@RequestMapping(value = "logout.mg", method=RequestMethod.GET)
 	public ModelAndView logout(HttpSession session) throws Exception{
@@ -40,9 +44,7 @@ public class MemberController {
 	public String search(HttpServletRequest request,Model model) throws Exception{
 		System.out.println("멤버list 페이지");
 		
-		BankMembersDAO dao = new BankMembersDAO();
-		
-		ArrayList<BankMembersDTO> arr = dao.getSearchByID(request.getParameter("search"));
+		ArrayList<BankMembersDTO> arr = service.getSearchByID(request.getParameter("search"));
 		
 
 		model.addAttribute("mlist", arr);
@@ -63,17 +65,13 @@ public class MemberController {
 	public String login(HttpSession session /*HttpServletRequest request*/, BankMembersDTO dto, Model model) throws Exception {
 		System.out.println("db에 로그인 실행");
 		
-		BankMembersDAO dao = new BankMembersDAO();
-		
-		dto = dao.getLogin(dto);
+		dto = service.getLogin(dto);
 //		model.addAttribute("member", dto); //이렇게 해도 메인페이지에서는 member를 받아오지 못한다. 우리가 리다이렉트로 주소값을 반환하므로
 		
 		//그래서 응답을 해도 없어지지 않는 session 객체에 담아 리턴해준다.
 //		HttpSession session = request.getSession();
 		session.setAttribute("member", dto);
-		
-		
-		System.out.println(dto);
+
 		return "redirect:../";
 	} 
 	
@@ -97,7 +95,6 @@ public class MemberController {
 		System.out.println("회원가입 post 실행");
 		
 //		BankMembersDTO dto = new BankMembersDTO();
-		BankMembersDAO bmdao = new BankMembersDAO();
 		
 		//HttpServletRequset를 매개변수로 받지 않고도 파라미터를 받을 수 있다(BankBookController detail에서 해보자)
 		//Bean(객체, DTO, VO) DTO클래스의 멤버변수의 이름과 파라미터의 이름이 같고, setter메서드가 있는 경우 아래 코드를 자동으로 해준다.
@@ -115,7 +112,7 @@ public class MemberController {
 		
 		int chk = 0;
 
-		chk = bmdao.setJoin(dto);
+		chk = service.setJoin(dto);
 
 		
 		if(chk == 1) {

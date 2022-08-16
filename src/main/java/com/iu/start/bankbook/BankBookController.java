@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/bankbook/*")
 public class BankBookController {
 	
+	@Autowired
+	private BankBookService service;
+	
 	@RequestMapping(value = "delete.mg", method = RequestMethod.GET)
 	public String delete(BankBookDTO dto) throws Exception{
 		System.out.println("bankbook delete 실행");
 		
-		BankBookDAO dao = new BankBookDAO();
-		
-		int i = dao.delete(dto);
+		int i = service.delete(dto);
 		
 		if(i==1) {
 			System.out.println("삭제성공");
@@ -36,9 +38,7 @@ public class BankBookController {
 	public void update(BankBookDTO dto, Model model) throws Exception{
 		System.out.println("bankbook update 실행");
 		
-		BankBookDAO dao = new BankBookDAO();
-		
-		BankBookDTO d = dao.getDetail(dto);
+		BankBookDTO d = service.getDetail(dto);
 		
 		model.addAttribute("dto", d);
 	}
@@ -48,9 +48,7 @@ public class BankBookController {
 	public String update(BankBookDTO dto) throws Exception{
 		System.out.println("bankbook update 실행");
 		
-		BankBookDAO dao = new BankBookDAO();
-		
-		int chk = dao.setUpdate(dto);
+		int chk = service.setUpdate(dto);
 		
 		if(chk==1) {
 			System.out.println("성공");
@@ -64,9 +62,7 @@ public class BankBookController {
 	public String getList(Model model) throws Exception{//모델앤뷰의 모델을 매개변수로 받는다.
 		System.out.println("list실행");
 		
-		
-		BankBookDAO dao = new BankBookDAO();
-		ArrayList<BankBookDTO> arr = dao.getList();
+		ArrayList<BankBookDTO> arr = service.getList();
 		
 		model.addAttribute("list", arr);
 //		위 모델은 아래 리퀘스트와 동일하다. 꺼낼때도 request에서 꺼내도 문제어벗ㄷ당
@@ -80,14 +76,12 @@ public class BankBookController {
 	public ModelAndView detail(String booknum)throws Exception { //신기하게도 이렇게 void로 주면 자동으로 "bankbook/detail.jsp"를 찾아간다.
 		System.out.println("detail실행");
 		System.out.println("booknum:"+booknum);
-		
 
-		BankBookDAO dao = new BankBookDAO();
 		BankBookDTO dto = new BankBookDTO();
 		
 		dto.setBooknum(Long.parseLong(booknum));
 		
-		dto = dao.getDetail(dto);
+		dto = service.getDetail(dto);
 	
 
 		ModelAndView mv = new ModelAndView();
