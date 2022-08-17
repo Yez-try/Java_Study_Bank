@@ -14,11 +14,14 @@
 		<!-- resultType은 리턴받을 타입을 넣어준다.
 		 SELECT의 컬럼명과 RETURN받을 변수명이 일치해야 하므로 N개를 받더라도 DTO로 받아준다. -->
 	</select>
+	<!-- parameterType에 String만 써도 된다. -->
+	<select id="getSearchByID" parameterType="java.lang.String" resultType="com.iu.start.bankMembers.BankMembersDTO">
+		SELECT * FROM BANKMEMBERS where id like '%'||#{search}||'%' order by id ASC
+	</select> <!-- 가끔가다가 마이바티스가 String클래스의 search가 없다고 하는 에러가 뜬다, 그래서 그냥 DTO에 담는게 더 나을 수 있다. -->
 	
-	<select id="getSearchByID" parameterType="String" resultType="com.iu.start.bankMembers.BankMembersDTO">
-		SELECT * FROM BANKMEMBERS where id like '%'||#{search}||'%' order by id asc
-	</select>
-	
+	<insert id="setJoin" parameterType="com.iu.start.bankMembers.BankMembersDTO"> <!-- 숫자가 리턴되므로 resultType을 따로 써주지 않는다. -->
+		insert into BANKMEMBERS (ID,PW,name, email,phone, lv) values (#{id},#{pw},#{name},#{email},#{phone},#{lv})
+	</insert>
 		 
 		 
 		 	<!-- 자바에서 sql을 쓰지 않고 여기서 써준다.

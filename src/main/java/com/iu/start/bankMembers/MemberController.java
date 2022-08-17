@@ -1,6 +1,7 @@
 package com.iu.start.bankMembers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,7 +45,7 @@ public class MemberController {
 	public String search(HttpServletRequest request,Model model) throws Exception{
 		System.out.println("멤버list 페이지");
 		
-		ArrayList<BankMembersDTO> arr = service.getSearchByID(request.getParameter("search"));
+		List<BankMembersDTO> arr = service.getSearchByID(request.getParameter("search"));
 		
 
 		model.addAttribute("mlist", arr);
