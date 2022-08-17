@@ -5,35 +5,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.iu.start.util.DBConnector;
 
+@Repository
 public class BankMembersDAO implements MembersDAO{
+	
+	@Autowired
+	private SqlSession session;
+	private final String NAMESPACE = "com.iu.start.bankMembers.BankMembersDAO.";
 	
 	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
 		
-		Connection con = DBConnector.getConnection();
-		
-		String sql = "select id, name from bankmembers where id=? and pw=?";
-		
-		PreparedStatement ps = con.prepareStatement(sql);
-		
-		ps.setString(1, dto.getId());
-		ps.setString(2, dto.getPw());
-		
-		ResultSet rs = ps.executeQuery();
-		
-		if(rs.next()) {
-			dto = new BankMembersDTO();
-			
-			dto.setId(rs.getString("id"));
-			dto.setName(rs.getString("name"));
-		}else {
-			return null;
-		}
-		
-		return dto;
+		return session.selectOne(NAMESPACE+"getLogin", dto);
 	}
 
 	@Override
