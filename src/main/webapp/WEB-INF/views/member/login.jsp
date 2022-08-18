@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <div>
+        <ul>
+            <li><a href="/bankbook/list.mg">상품리스트</a></li>
+            <li><a href="/board/list.mg">게시판</a></li>
+            <li><a href="/member/login.mg">로그인</a></li>
+            <li><a href="/member/join.mg">회원가입</a></li>
+        </ul>
+    
+    </div>
 	<h1>Login Page</h1>
 	<hr>
     <!-- HTML이 루트폴더가 됨 -->
@@ -22,8 +31,8 @@
         아이디 기억하기 <input type = "checkbox" name = "holdId">
         </form>
         
-        
-    	<img src = "/resources/img/발레하는유리.jpg">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/w7aQE69x2kQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    	<img src = "/resources/img/귀여운유리.png">
     </div>
 </body>
 </html>

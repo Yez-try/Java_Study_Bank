@@ -7,8 +7,49 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="./resources/css/test.css">
+	<style><!-- 인터널방식 -->
+		li{
+			color:green;
+		}
+	</style>
+
 </head>
 <body>
+<h2>h2를 분홍색으로</h2>
+<!-- 순서가 있는 리스트-->
+<ol> <!-- 앞에 숫자가 나옴 -->
+	<li style="color:red;">first</li> <!-- 인라인방식 -->
+	<li>Second</li>
+	<li>third</li>
+</ol>
+
+<!-- 순서가 없는 리스트 -->
+<ul> <!-- 앞에 동그라미가 나옴 -->
+	<li>first</li>
+	<li>Second</li>
+	<li>third</li>
+</ul>
+
+<!-- nav -->
+
+
+
+<!-- Group -->
+<div>
+	<ul>
+		<li><a href="/bankbook/list.mg">상품리스트</a></li>
+		<li><a href="/board/list.mg">게시판</a></li>
+		<li><a href="/member/login.mg">로그인</a></li>
+		<li><a href="/member/join.mg">회원가입</a></li>
+	</ul>
+
+</div>
+
+<img src="/resources/img/발레하는유리.jpg" >
+<!-- alt속성은 웹접근성 관련한 내용으로 여기에 이미지가 있음을 알려줌/ 디자이너가 함 -->
+
+
 
 <h1>
 	Hello world!  
