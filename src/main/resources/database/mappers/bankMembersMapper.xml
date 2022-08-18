@@ -6,7 +6,7 @@
 
 
 <mapper namespace="com.iu.start.bankMembers.BankMembersDAO">
-	<select id="getLogin" parameterType="com.iu.start.bankMembers.BankMembersDTO" resultType="com.iu.start.bankMembers.BankMembersDTO">
+	<select id="getLogin" parameterType="BankMembersDTO" resultType="BankMembersDTO"> <!-- mybatisConfig파일에 넣어주면된다. -->
 		select id, name from bankmembers where id=#{id} and pw=#{pw}
 	</select>
 	
