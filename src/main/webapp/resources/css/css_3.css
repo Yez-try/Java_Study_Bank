@@ -1,0 +1,33 @@
+.c1{
+    background-color: dimgrey;
+    /* 가로 width */
+    width: 500px;
+    /* 세로 height */
+    height: 300px;
+    /* 보일 때는 오른쪽에 공간이 있어보이지만 실제로는 공간을 차지하고 있음 */
+
+    margin-top: 100px;
+    margin-left: 50px;
+
+    /* border는 3가지가 필요*/
+    /* 1. 선의 종류 */
+    border-top-style: solid;
+    /* 2. 선의 두께 */
+    border-top-width: 5px;
+    /* 3. 선의 색깔 */
+    border-top-color: aqua;
+
+
+    /* short hand */
+    /* 여러개를 한꺼번에 적용하는 방법 */
+    border-right: solid black 7px;
+
+
+}
+
+.c2{
+    background-color: aquamarine;
+    width: 300px;
+    height: 300px;
+    border: dashed red 5px ;
+}

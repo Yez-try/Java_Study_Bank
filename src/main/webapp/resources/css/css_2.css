@@ -1,0 +1,35 @@
+.c1{
+    display: inline;
+}
+
+.c2{
+    display: block;
+    font-size: 32px;
+}
+
+.c3{
+    font-size: 32px;
+}
+
+.c3_1{
+    font-size: 200%;
+    /* 나를 감싸고 있는 부모의 폰트 사이즈의 200% */
+}
+
+.c4{
+    font-size: 32px;
+}
+
+.c4_1{
+    font-size: 1.5em;
+    /* 퍼센트와 같은 의미, 부모의 배수를 의미한다 */
+}
+
+.c5{
+    font-size: 32px;
+}
+
+.c5_1{
+    font-size: 1.5rem;
+    /* rem은 부모가 아니라 기본 저장되어있는 폰트사이즈(div는 16px)를 기준으로 사이즈 조정*/
+}

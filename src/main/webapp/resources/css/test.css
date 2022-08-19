@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
 h2{
-    color:violet;
+    color:purple;
+}
+
+/* id선택자 */
+#t2{
+    color: red;
+}
+
+/* class 선택자 */
+/* .클래스명 */
+.c1{
+    color: green;
 }
