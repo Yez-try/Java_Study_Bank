@@ -15,7 +15,6 @@
 	<hr>
 	내용 입력 <br>
 	<textarea rows="10" cols="100"   name ="contents"></textarea>
-	<input type="hidden" value=${sessionScope.member.id } name="id">
 	<br>
 	<button type ="submit">작성완료</button>
 </form>

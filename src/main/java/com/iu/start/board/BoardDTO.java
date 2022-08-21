@@ -4,18 +4,18 @@ import java.sql.Date;
 
 public class BoardDTO {
 	
-	private Long no;
+	private Long num;
 	private String title;
 	private String contents;
 	private String writer;
 	private Date regdate;
 	private Integer hit;
 	
-	public Long getNo() {
-		return no;
+	public Long getNum() {
+		return num;
 	}
-	public void setNo(Long no) {
-		this.no = no;
+	public void setNum(Long num) {
+		this.num = num;
 	}
 	public String getTitle() {
 		return title;

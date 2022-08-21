@@ -16,17 +16,17 @@
 	<table border ="1">
 	<thead>
 		<tr>
-			<th>NO</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
+			<th>NUM</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일</th>
 		</tr>
 	</thead>
 	<tbody>
 	<c:forEach items="${list}" var="board">
 		<tr>
-			<td>${pageScope.board.no}</td>
-			<td><a href = "./detail.mg?no=${pageScope.board.no}">${board.title }</a></td>
-			<td>${board.id }</td>
-			<td>${board.views }</td>
-			<td>${board.bdate }</td>
+			<td>${pageScope.board.num}</td>
+			<td><a href = "./detail.mg?num=${pageScope.board.num}">${board.title }</a></td>
+			<td>${board.writer }</td>
+			<td>${board.hit }</td>
+			<td>${board.regdate }</td>
 	</c:forEach>
 	</tbody>
 	</table>

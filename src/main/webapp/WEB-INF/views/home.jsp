@@ -6,36 +6,48 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Home</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 
-<h1>
-	Hello world!  
-</h1>
+<c:import url="templetes/header.jsp"></c:import>
 
-<P>  The time on the server is ${serverTime}. </P>
-
-<c:if test="${empty sessionScope.member}">
-<!-- 로그인이 안됐으면 이게 나오고 -->
-<a href="./member/login.mg">로그인</a><br>
-<a href="member/join.mg">회원가입</a>
-</c:if>
-<!-- 로그인이 됐으면 이게 나온다 ifelse문이 없으므로 단일if문으로 써준다-->
 <c:if test="${not empty sessionScope.member }">
 <h3>${sessionScope.member.name}님 환영합니다.</h3>
 <a href ="./member/logout.mg">Logout</a>
-<a href ="#">My page</a>
-
 </c:if>
-<hr>
-<a href="./bankbook/list.mg">상품리스트</a>
-<a href="./bankbook/add.mg">상품등록</a>
-<hr>
-<a href ="./board/list.mg">글목록보기</a>
-<hr>
 
-<a href="./member/search.mg">아이디검색</a>
+<div class="row justify-content-md-center">
+<div id="carouselExampleFade" class="carousel slide carousel-fade col-lg-8" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="./board/list.mg"> <img src="resources/img/board.jpg" class="d-block w-100"> </a>
+    </div>
+    <div class="carousel-item">
+      <img src="resources/img/bookbooklist.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
 
+
+
+
+
+
+<c:import url="templetes/footer.jsp"></c:import>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

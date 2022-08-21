@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+		    
+<mapper namespace="com.iu.start.board.BoardDAO">
+
+	<select id="getList" resultType="BoardDTO">
+		select * from notice order by num asc
+	</select>
+	
+	<update id="updateHit" parameterType="BoardDTO">
+		update notice set Hit = Hit+1 where num=#{num}
+	</update>
+	
+	<select id="getDetail" parameterType="BoardDTO" resultType="BoardDTO">
+		select * from notice where num = #{num}
+	</select>
+	
+	<insert id="insert" parameterType="BoardDTO">
+		insert into notice (num, title, contents, Writer, Hit, Regdate) 
+		values (Board_SEQ.nextval, #{title}, #{contents}, #{writer}, 0, sysdate)
+	</insert>
+	
+	<update id="update" parameterType="BoardDTO">
+		update notice set contents =#{contents},title=#{title} where num = #{num}
+	</update>
+	
+	<delete id="delete" parameterType="BoardDTO">
+		delete notice where num=#{num}
+	</delete>
+
+</mapper>
