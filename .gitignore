@@ -123,3 +123,4 @@ $RECYCLE.BIN/
 # My DBConnector 
 DBConnector.java
 target/*
+database.properties

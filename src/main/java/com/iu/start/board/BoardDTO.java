@@ -7,9 +7,9 @@ public class BoardDTO {
 	private Long no;
 	private String title;
 	private String contents;
-	private String id;
-	private Date bdate;
-	private Integer views;
+	private String writer;
+	private Date regdate;
+	private Integer hit;
 	
 	public Long getNo() {
 		return no;
@@ -29,24 +29,23 @@ public class BoardDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public String getId() {
-		return id;
+	public String getWriter() {
+		return writer;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-	public Date getBdate() {
-		return bdate;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setBdate(Date bdate) {
-		this.bdate = bdate;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
-	public Integer getViews() {
-		return views;
+	public Integer getHit() {
+		return hit;
 	}
-	public void setViews(Integer views) {
-		this.views = views;
+	public void setHit(Integer hit) {
+		this.hit = hit;
 	}
-
 
 }

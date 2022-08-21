@@ -9,11 +9,11 @@ import com.iu.start.util.DBConnector;
 
 public class BoardDAO {
 	
-	public int updateViews(BoardDTO dto) throws Exception{
+	public int updateHit(BoardDTO dto) throws Exception{
 		
 		Connection con = DBConnector.getConnection();
 		
-		String sql = "update board set views = views+1 where no=?";
+		String sql = "update board set Hit = Hit+1 where no=?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		
@@ -41,9 +41,9 @@ public class BoardDAO {
 			dto.setNo(rs.getLong("no"));
 			dto.setTitle(rs.getString("title"));
 			dto.setContents(rs.getString("contents"));
-			dto.setBdate(rs.getDate("bdate"));
-			dto.setViews(rs.getInt("views"));
-			dto.setId(rs.getString("id"));
+			dto.setRegdate(rs.getDate("Regdate"));
+			dto.setHit(rs.getInt("Hit"));
+			dto.setWriter(rs.getString("Writer"));
 			
 			arr.add(dto);
 		}
@@ -64,11 +64,11 @@ public class BoardDAO {
 		ResultSet rs = ps.executeQuery();
 		
 		if(rs.next()) {
-			dto.setBdate(rs.getDate("bdate"));
+			dto.setRegdate(rs.getDate("Regdate"));
 			dto.setContents(rs.getString("contents"));
-			dto.setId(rs.getString("id"));
+			dto.setWriter(rs.getString("Writer"));
 			dto.setTitle(rs.getString("title"));
-			dto.setViews(rs.getInt("views"));
+			dto.setHit(rs.getInt("Hit"));
 		}else {
 			return null;
 		}
@@ -79,14 +79,14 @@ public class BoardDAO {
 		
 		Connection con = DBConnector.getConnection();
 		
-		String sql = "insert into board (no, title, contents, id, views, bdate) "
+		String sql = "insert into board (no, title, contents, Writer, Hit, Regdate) "
 				+ "values ((select max(no)+1 from board), ?, ?, ?, 0, sysdate)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ps.setString(1, dto.getTitle());
 		ps.setString(2, dto.getContents());
-		ps.setString(3, dto.getId());
+		ps.setString(3, dto.getWriter());
 		
 		int result = ps.executeUpdate();
 		

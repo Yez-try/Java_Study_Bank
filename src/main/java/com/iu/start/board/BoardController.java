@@ -42,7 +42,7 @@ public class BoardController {
 		
 		HttpSession session = request.getSession();
 		
-		int chk = dao.updateViews(dto);
+		int chk = dao.updateHit(dto);
 		System.out.println(chk);
 		return dto;
 	}
