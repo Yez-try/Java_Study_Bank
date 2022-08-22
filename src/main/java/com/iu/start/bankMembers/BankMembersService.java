@@ -24,24 +24,25 @@ public class BankMembersService {
 	@Autowired
 	private BankAccountDAO accountDAO;
 	
-	public Map<String, Object> getMine(BankMembersDTO dto) throws Exception{
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		dto = dao.getMine(dto);
-		List<BankAccountDTO> list = accountDAO.getListById(dto);
-		
-		map.put("list", list);
-		map.put("dto", dto);
-		
-		return map;
-	}
-	
-//	public BankMembersDTO getMine(BankMembersDTO dto) throws Exception{
+//	public Map<String, Object> getMine(BankMembersDTO dto) throws Exception{
+//		Map<String, Object> map = new HashMap<String, Object>();
 //		
-//		dto = dao.getMyPageResult(dto);
+//		dto = dao.getMine(dto);
+//		List<BankAccountDTO> list = accountDAO.getListById(dto);
 //		
-//		return dto;
+//		map.put("list", list);
+//		map.put("dto", dto);
+//		
+//		return map;
 //	}
+	
+	public BankMembersDTO getMine(BankMembersDTO dto) throws Exception{
+		
+//		dto = dao.getMyPageResult(dto);
+		dto = dao.getMine(dto);
+		
+		return dto;
+	}
 	
 	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
 		return dao.getLogin(dto);

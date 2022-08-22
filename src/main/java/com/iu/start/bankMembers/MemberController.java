@@ -36,13 +36,13 @@ public class MemberController {
 		List<BankAccountDTO> list = accountService.getListById(dto);
 		
 		mv.addObject("list", list);
-		mv.addObject("dto", dto);
+//		mv.addObject("dto", dto);
 		
-		Map<String, Object> map = service.getMine(dto);
+//		Map<String, Object> map = service.getMine(dto);
+//		
+//		mv.addObject("map",map);
 		
-		mv.addObject("map",map);
-		
-//		dto = service.getMine(dto);
+		dto = service.getMine(dto);
 		mv.addObject("dto",dto);
 		
 		return mv;

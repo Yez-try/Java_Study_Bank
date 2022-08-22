@@ -29,44 +29,23 @@
 	전화번호 : ${dto.phone}<br>
 	
 	</section>
-	<table border="1" class="border border-dark">
-		<tr><th>계좌번호</th><th>상품명</th><th>가입일</th></tr>
-		<c:forEach items="${dto.bankAccountDTOs}" var="account">
-			<tr>
-			<td>${account.acnum }</td>
-			<td>${account.bankBookDTO.bookname }</td>
-			<td>${account.acdate }</td>
-			</tr>
-		</c:forEach>
-		
-	</table>
+
 	<table class="table">
 	  <thead>
 	    <tr>
-	      <th scope="col">#</th>
-	      <th scope="col">First</th>
-	      <th scope="col">Last</th>
-	      <th scope="col">Handle</th>
+	      <th scope="col">상품명</th>
+	      <th scope="col">계좌번호</th>
+	      <th scope="col">가입일</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Mark</td>
-	      <td>Otto</td>
-	      <td>@mdo</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Jacob</td>
-	      <td>Thornton</td>
-	      <td>@fat</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td colspan="2">Larry the Bird</td>
-	      <td>@twitter</td>
-	    </tr>
+		<c:forEach items="${list}" var="account">
+			<tr>
+			<td>${account.bankBookDTO.bookname }</td>
+			<td>${account.acnum }</td>
+			<td>${account.acdate }</td>
+			</tr>
+		</c:forEach>
 	  </tbody>
 	</table>
 	
