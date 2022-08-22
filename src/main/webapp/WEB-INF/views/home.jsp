@@ -1,84 +1,78 @@
-<!-- jstl을 쓰겠다 라고 선언하는 코드.  <c하면 나오는 문번들은 jstl언어이다 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 아래코드가 한글 안깨져 보이게 하는 코드 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<html>
-<head>
-	<title>Home</title>
-	<link rel="stylesheet" href="./resources/css/test.css">
-	<style><!-- 인터널방식 -->
-		li{
-			color:green;
-		}
-	</style>
-
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        a{
+            color:aliceblue;
+        }
+    </style>
 </head>
-<body>
-<h2>h2를 분홍색으로</h2>
-<!-- 순서가 있는 리스트-->
-<ol> <!-- 앞에 숫자가 나옴 -->
-	<li style="color:red;">first</li> <!-- 인라인방식 -->
-	<li>Second</li>
-	<li>third</li>
-</ol>
+  <body>
+      <!-- header -->
+  	<c:import url="./templetes/header.jsp"></c:import>
+    
 
-<!-- 순서가 없는 리스트 -->
-<ul> <!-- 앞에 동그라미가 나옴 -->
-	<li>first</li>
-	<li>Second</li>
-	<li>third</li>
-</ul>
+    <section class="container-fluid col-lg-8 mt-4">
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+              	<a href="./member/myPage.mg">
+                <img src="/resources/img/fnc2.jpg" class="d-block w-100" alt="...">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>First slide label</h5>
+                  <p>Some representative placeholder content for the first slide.</p>
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <img src="/resources/img/fnc1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Second slide label</h5>
+                  <p>Some representative placeholder content for the second slide.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="/resources/img/fnc3.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Third slide label</h5>
+                  <p>Some representative placeholder content for the third slide.</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+    </section>
 
-<!-- nav -->
+    <div class="container-fluid">
+        <div class="row">
+           
+        </div>
 
+    </div>
 
-
-<!-- Group -->
-<div>
-	<ul>
-		<li><a href="/bankbook/list.mg">상품리스트</a></li>
-		<li><a href="/board/list.mg">게시판</a></li>
-		<li><a href="/member/login.mg">로그인</a></li>
-		<li><a href="/member/join.mg">회원가입</a></li>
-	</ul>
-
-</div>
-
-<img src="/resources/img/발레하는유리.jpg" >
-<!-- alt속성은 웹접근성 관련한 내용으로 여기에 이미지가 있음을 알려줌/ 디자이너가 함 -->
-
-
-
-<h1>
-	Hello world!  
-</h1>
-<h3>
-	Add VSCODE
-</h3>
-<h3>Add Spring</h3>
-
-<P>  The time on the server is ${serverTime}. </P>
-
-<c:if test="${empty sessionScope.member}">
-<!-- 로그인이 안됐으면 이게 나오고 -->
-<a href="./member/login.mg">로그인</a><br>
-<a href="member/join.mg">회원가입</a>
-</c:if>
-<!-- 로그인이 됐으면 이게 나온다 ifelse문이 없으므로 단일if문으로 써준다-->
-<c:if test="${not empty sessionScope.member }">
-<h3>${sessionScope.member.name}님 환영합니다.</h3>
-<a href ="./member/logout.mg">Logout</a>
-<a href ="#">My page</a>
-</c:if>
-<hr>
-<a href="./bankbook/list.mg">상품리스트</a>
-<a href="./bankbook/add.mg">상품등록</a>
-
-<hr>
-
-<a href="./member/search.mg">아이디검색</a>
-
-</body>
+	<!-- footer -->
+	
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
 </html>

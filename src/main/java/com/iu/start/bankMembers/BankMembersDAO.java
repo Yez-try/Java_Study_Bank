@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.iu.start.bankAccount.BankAccountDTO;
 import com.iu.start.util.DBConnector;
 
 @Repository
@@ -19,6 +20,10 @@ public class BankMembersDAO implements MembersDAO{
 	@Autowired
 	private SqlSession session;
 	private final String NAMESPACE = "com.iu.start.bankMembers.BankMembersDAO.";
+	
+	public BankMembersDTO getMine(BankMembersDTO dto) throws Exception{
+		return session.selectOne(NAMESPACE+"getMine", dto);
+	}
 	
 	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
 		

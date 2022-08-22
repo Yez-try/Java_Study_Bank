@@ -1,6 +1,7 @@
 package com.iu.start.bankMembers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,12 +13,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.start.bankAccount.BankAccountDTO;
+import com.iu.start.bankAccount.BankAccountService;
+
 @Controller
 @RequestMapping(value = "/member/*") //루트 밑에 멤버로 시작하는 모든 애들은 여기로 와라
 public class MemberController {
 	
 	@Autowired
-	private bankMembersService service;
+	private BankMembersService service;
+	@Autowired
+	private BankAccountService accountService;
+	
+	
+	@RequestMapping(value = "myPage.mg", method=RequestMethod.GET)
+	public ModelAndView myPage(HttpSession session) throws Exception{
+		System.out.println("마이페이지 실행");
+		ModelAndView mv = new ModelAndView();
+		
+		BankMembersDTO dto = (BankMembersDTO)session.getAttribute("member");
+		
+		dto = service.getMine(dto);
+		
+		List<BankAccountDTO> accountList = accountService.getListById(dto);
+		
+		mv.addObject("accountList", accountList);
+		mv.addObject("mine", dto);
+		
+		return mv;
+	}
 	
 	@RequestMapping(value = "logout.mg", method=RequestMethod.GET)
 	public ModelAndView logout(HttpSession session) throws Exception{

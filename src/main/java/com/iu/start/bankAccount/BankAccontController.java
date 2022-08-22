@@ -11,16 +11,16 @@ import com.iu.start.bankMembers.BankMembersDTO;
 
 @Controller
 @RequestMapping("/bankAccount/*")
-public class bankAccontController {
+public class BankAccontController {
 	
-	private bankAccountDAO dao;
+	private BankAccountDAO dao;
 	
-	public bankAccontController(){ //누군가가 컨트롤러 객체를 만들때 실행해라
-		this.dao = new bankAccountDAO();
+	public BankAccontController(){ //누군가가 컨트롤러 객체를 만들때 실행해라
+		this.dao = new BankAccountDAO();
 	}
 	
 	@RequestMapping(value = "add.mg", method = RequestMethod.GET)
-	public String add(HttpSession session, bankAccountDTO dto) throws Exception{
+	public String add(HttpSession session, BankAccountDTO dto) throws Exception{
 		System.out.println("BankAccount Add메서드 실행");
 		
 		//DTO: id, booknum이 필요하다.

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		    
+<mapper namespace="com.iu.start.bankAccount.BankAccountDAO">
+	<select id="getListById" parameterType="BankMembersDTO" resultMap="getListByIdResult">
+		select ba.acnum, bb.bookname, ba.acdate
+		from bankaccount ba inner JOIN BANKBOOK BB USING (booknum) 
+		where ba.id=#{id}
+	</select>
+	
+	<resultMap type="BankAccountDTO" id="getListByIdResult">
+		<id column="ACNUM" property="acnum"/>
+		<result column="ACDATE" property="acdate"/>
+		
+		<!-- 1:1관계 association -->
+		<association property="bankBookDTO" javaType="BankBookDTO">
+			<result column="BOOKNAME" property="bookname"/>
+		</association>
+	</resultMap>
+
+</mapper>

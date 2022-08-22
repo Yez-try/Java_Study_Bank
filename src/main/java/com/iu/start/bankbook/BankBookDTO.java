@@ -1,11 +1,14 @@
 package com.iu.start.bankbook;
 
+import java.util.List;
+
 public class BankBookDTO {
 	
-	long booknum;
-	String bookname;
-	double bookrate;
-	int booksale;
+	private long booknum;
+	private String bookname;
+	private double bookrate;
+	private int booksale;
+//	private List<BankAccountDTO> bankAccountDTO;//1대N의 관계인경우
 	
 	public long getBooknum() {
 		return booknum;

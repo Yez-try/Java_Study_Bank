@@ -10,4 +10,8 @@
 		select id, name from bankmembers where id=#{id} and pw=#{pw}
 	</select>
 	
+	<select id="getMine" parameterType="BankMembersDTO" resultType="BankMembersDTO">
+		select id,name,pw,email,phone,lv from bankmembers where id=#{id}
+	</select>
+	
 </mapper>
