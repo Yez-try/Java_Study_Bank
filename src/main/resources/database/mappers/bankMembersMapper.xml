@@ -14,4 +14,30 @@
 		select id,name,pw,email,phone,lv from bankmembers where id=#{id}
 	</select>
 	
+	<select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult">
+		SELECT ID, NAME, EMAIL, PHONE, ACNUM, BOOKNUM, ACDATE
+		FROM BANKMEMBERS bm INNER JOIN BANKACCOUNT ba USING (ID)
+		inner join BANKBOOK bb using (BOOKNUM)
+		WHERE ID=#{id}
+	</select>
+	
+	<resultMap type="BankMembersDTO" id="getMyPageResult">
+		<id column="ID" property="id"/>
+		<result column="NAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		
+		<!-- 1:N의 관계에서는 collection을 쓴다. -->
+		<collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO">
+			<id column="ACNUM" property="acnum"/>
+			<result column="ACDATE" property="acdate"/>
+			
+			<association property="bankBookDTO" javaType="BankBookDTO">
+				<result column="BOOKNUM" property="booknum"/>
+			</association>
+		
+		</collection>
+		
+	</resultMap>
+	
 </mapper>

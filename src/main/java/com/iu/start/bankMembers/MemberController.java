@@ -2,6 +2,7 @@ package com.iu.start.bankMembers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,10 +22,9 @@ import com.iu.start.bankAccount.BankAccountService;
 public class MemberController {
 	
 	@Autowired
-	private BankMembersService service;
+	private BankMembersService service;	
 	@Autowired
 	private BankAccountService accountService;
-	
 	
 	@RequestMapping(value = "myPage.mg", method=RequestMethod.GET)
 	public ModelAndView myPage(HttpSession session) throws Exception{
@@ -33,12 +33,17 @@ public class MemberController {
 		
 		BankMembersDTO dto = (BankMembersDTO)session.getAttribute("member");
 		
-		dto = service.getMine(dto);
+		List<BankAccountDTO> list = accountService.getListById(dto);
 		
-		List<BankAccountDTO> accountList = accountService.getListById(dto);
+		mv.addObject("list", list);
+		mv.addObject("dto", dto);
 		
-		mv.addObject("accountList", accountList);
-		mv.addObject("mine", dto);
+		Map<String, Object> map = service.getMine(dto);
+		
+		mv.addObject("map",map);
+		
+//		dto = service.getMine(dto);
+		mv.addObject("dto",dto);
 		
 		return mv;
 	}
@@ -117,7 +122,7 @@ public class MemberController {
 	//join post방식
 	//오버로딩: 매개변수가 달라야하므로, HttpServletRequest request 값을 받아준다.
 	@RequestMapping(value = "/member/join.mg", method = RequestMethod.POST)
-	public String join(BankMembersDTO dto) throws Exception{
+	public String join(BankMembersDTO dto, HttpServletRequest request) throws Exception{
 		System.out.println("회원가입 post 실행");
 		
 //		BankMembersDTO dto = new BankMembersDTO();
@@ -130,11 +135,15 @@ public class MemberController {
 //		dto.setPhone(request.getParameter("phone"));
 //		dto.setPw(request.getParameter("pw"));
 //		if(request.getParameter("lv").equals("sysmanager")) {
+		dto.setLv("");
 		if(dto.getLv().equals("sysmanager")) {
 			dto.setLv("MANAGER");
 		}else {
 			dto.setLv("NORMAL");
 		}
+		
+		System.out.println(request.getAttribute("id"));
+		System.out.println(dto.getId());
 		
 		int chk = 0;
 

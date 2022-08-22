@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,15 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
 </head>
 <body>
     <div>
-        <ul>
-            <li><a href="/bankbook/list.mg">상품리스트</a></li>
-            <li><a href="/board/list.mg">게시판</a></li>
-            <li><a href="/member/login.mg">로그인</a></li>
-            <li><a href="/member/join.mg">회원가입</a></li>
-        </ul>
+    <c:import url="../templetes/header.jsp"></c:import>
     
     </div>
 	<h1>Login Page</h1>
@@ -25,14 +24,30 @@
     <div>
     	<!-- <form action="study/member/login" method="post"></form> -->
     	<form action="./login.mg" method="post">
-        ID  <input type = "text" name = "id" ><br> <!-- 입력한 input태그의 값이 value로 넘어가는데 구분이 어려워서 name속성이 구분해주는 이름(key)임 -->
-        PW  <input type = "password" name = "pw"> <br>
-        <input type = "submit">
-        아이디 기억하기 <input type = "checkbox" name = "holdId">
-        </form>
-        
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/w7aQE69x2kQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    	<img src = "/resources/img/귀여운유리.png">
-    </div>
+			<section class="container-fluid mt-5 text-center">
+				<div class="row justify-content-md-center">
+					<div class="mb-3 col-1">
+					  <label class="form-label">ID</label>
+					</div>
+					<div class="mb-3 col-2">
+					  <input type="text" class="form-control" name="id" placeholder="아이디 입력">
+					</div>
+				</div>
+				<div class="row justify-content-md-center">
+					<div class="col-1">		
+					  <label for="exampleFormControlInput1" class="form-label">Password</label>
+					</div>
+					<div class="col-2">
+					  <input type="password" class="form-control" name="pw" placeholder="비밀번호 입력">
+					</div>
+				</div>
+						<div class="container mt-3">
+						<button type="submit" class="btn btn-outline-dark" >로그인</button>
+						</div>
+			</section>
+			</form>
+    	<c:import url="../templetes/footer.jsp"></c:import>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    	
 </body>
 </html>

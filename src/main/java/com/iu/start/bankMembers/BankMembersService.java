@@ -1,7 +1,9 @@
 package com.iu.start.bankMembers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,10 +24,24 @@ public class BankMembersService {
 	@Autowired
 	private BankAccountDAO accountDAO;
 	
-	public BankMembersDTO getMine(BankMembersDTO dto) throws Exception{
+	public Map<String, Object> getMine(BankMembersDTO dto) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		dto = dao.getMine(dto);
 		List<BankAccountDTO> list = accountDAO.getListById(dto);
-		return dao.getMine(dto);
+		
+		map.put("list", list);
+		map.put("dto", dto);
+		
+		return map;
 	}
+	
+//	public BankMembersDTO getMine(BankMembersDTO dto) throws Exception{
+//		
+//		dto = dao.getMyPageResult(dto);
+//		
+//		return dto;
+//	}
 	
 	public BankMembersDTO getLogin(BankMembersDTO dto) throws Exception{
 		return dao.getLogin(dto);
