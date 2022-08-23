@@ -20,5 +20,4 @@
 			<result column="BOOKNAME" property="bookname"/>
 		</association>
 	</resultMap>
-
 </mapper>

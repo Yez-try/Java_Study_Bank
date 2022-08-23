@@ -15,17 +15,17 @@
 	      <div class="navbar-nav">
 	        <a class="nav-link active" aria-current="page" href="/">Home</a>
 	        <a class="nav-link" href="/bankbook/list.mg">상품리스트</a>
-	        <a class="nav-link" href="/board/list.mg">게시판</a>
+	        <a class="nav-link" href="/notice/list.mg">게시판</a>
 	      </div>
 	      <div class="navbar-nav">
 	      	<c:choose>
 	      		<c:when test="${empty sessionScope.member}">
-			        <a class="nav-link active" aria-current="page" href="./member/login.mg">로그인</a>
+			        <a class="nav-link active" aria-current="page" href="/member/login.mg">로그인</a>
 			        <a class="nav-link" href="/member/join.mg">회원가입</a>
 	        	</c:when>
 	        	<c:otherwise>
 	        		<a class="nav-link" href="/member/logout.mg">로그아웃</a>
-	        		<a class="nav-link active" aria-current="page" href="./member/myPage.mg">My page</a>
+	        		<a class="nav-link active" aria-current="page" href="/member/myPage.mg">My page</a>
 	        	</c:otherwise>
 	        </c:choose>
 	      </div>

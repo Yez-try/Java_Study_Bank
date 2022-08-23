@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		    
+<mapper namespace="com.iu.start.board.notice.NoticeDAO">
+	<select id="getList" resultType="NoticeDTO">
+		SELECT num, title, writer, regdate, hit FROM NOTICE ORDER BY NUM DESC
+	</select>	
+	<!-- 파라미터 타입을 NoticeDTO로 넣으면 안된다. 왜냐하면 한번 더 형변환을 하게 되므로 -->
+	<select id="getDetail" resultType="NoticeDTO" parameterType="BoardDTO"> 
+		SELECT * FROM NOTICE WHERE NUM=#{num}
+	</select>
+	<insert id="setAdd" parameterType="BoardDTO">
+		INSERT INTO NOTICE (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT)
+		VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, 0)
+	</insert>
+	<update id="setUpdate" parameterType="BoardDTO">
+		UPDATE NOTICE SET TITLE=#{title} , CONTENTS=#{contents} WHERE NUM=#{num}
+	</update>
+	<delete id="setDelete" parameterType="BoardDTO">
+		DELETE NOTICE WHERE NUM=#{num}
+	</delete>
+	
+
+</mapper>

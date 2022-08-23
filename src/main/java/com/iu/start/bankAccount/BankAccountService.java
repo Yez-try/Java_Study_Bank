@@ -16,5 +16,9 @@ public class BankAccountService {
 	public List<BankAccountDTO> getListById(BankMembersDTO member) throws Exception{
 		return dao.getListById(member);
 	}
+	
+	public int add(BankAccountDTO dto) throws Exception{
+		return dao.add(dto);
+	}
 
 }

@@ -12,41 +12,67 @@
 </head>
 <body>
     <div>
-    <c:import url="../templetes/header.jsp"></c:import>
-    
+    <c:import url="../templetes/header.jsp"></c:import>   
     </div>
-	<h1>Login Page</h1>
-	<hr>
-    <!-- HTML이 루트폴더가 됨 -->
-    <!-- 	//id,pw를 입력해도 같은 로그인 페이지로 요청이 올텐데 어떻게 구분하지?
-			//Get방식으로 주면 : 로그인 가입 양식을 보려고 하는구나!
-			//Post 방식으로 주면 : 입력한 정보로 로그인 판단 -->
-    <div>
-    	<!-- <form action="study/member/login" method="post"></form> -->
-    	<form action="./login.mg" method="post">
-			<section class="container-fluid mt-5 text-center">
-				<div class="row justify-content-md-center">
-					<div class="mb-3 col-1">
-					  <label class="form-label">ID</label>
-					</div>
-					<div class="mb-3 col-2">
-					  <input type="text" class="form-control" name="id" placeholder="아이디 입력">
-					</div>
-				</div>
-				<div class="row justify-content-md-center">
-					<div class="col-1">		
-					  <label for="exampleFormControlInput1" class="form-label">Password</label>
-					</div>
-					<div class="col-2">
-					  <input type="password" class="form-control" name="pw" placeholder="비밀번호 입력">
-					</div>
-				</div>
-						<div class="container mt-3">
-						<button type="submit" class="btn btn-outline-dark" >로그인</button>
-						</div>
-			</section>
-			</form>
-    	<c:import url="../templetes/footer.jsp"></c:import>
+
+
+	<section class="vh-100" style="background-color: #eee;">
+	  <div class="container h-100">
+	    <div class="row d-flex justify-content-center align-items-center h-100">
+	      <div class="col-lg-12 col-xl-11">
+	        <div class="card text-black" style="border-radius: 25px;">
+	          <div class="card-body p-md-5">
+	            <div class="row justify-content-center">
+	              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+	
+	                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
+	
+	                <form class="mx-1 mx-md-4" action="./login.mg" method="post">
+	
+	                  <div class="d-flex flex-row align-items-center mb-4">
+	                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+	                    <div class="form-outline flex-fill mb-0">
+	                      <label class="form-label" for="id"> ID</label>
+	                      <input type="text" name="id" class="form-control" />
+	                    </div>
+	                  </div>
+	                  
+	                  <div class="d-flex flex-row align-items-center mb-4">
+	                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+	                    <div class="form-outline flex-fill mb-0">
+	                      <label class="form-label" for="form3Example4c">Password</label>
+	                      <input type="password" name=pw class="form-control" />
+	                    </div>
+	                  </div>
+	
+	
+	                  <div class="form-check d-flex justify-content-center mb-5">
+	                    <input class="form-check-input me-2" type="checkbox" name="remind" id="form2Example3c" />
+	                    <label class="form-check-label" for="form2Example3">
+	                      아이디 저장
+	                    </label>
+	                  </div>
+	
+	                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+	                    <button type="submit" class="btn btn-dark btn-lg">Login</button>
+	                  </div>
+	
+	                </form>
+	
+	              </div>
+	
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+   
+   <div>   
+	    <c:import url="../templetes/footer.jsp"></c:import>
+   </div>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     	
 </body>
