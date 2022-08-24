@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.board.impl.BoardDTO;
+import com.iu.start.util.Pager;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -27,14 +28,32 @@ public class NoticeController {
 	
 	//글목록
 	@RequestMapping(value = "list.mg", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value="p", defaultValue="1")Long page) throws Exception{
+	public ModelAndView getList(Pager pager) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		List<BoardDTO> arr = service.getList(page);
+		System.out.println(pager.getPage() + "Page: 글목록의 페이지 번호 (보내줌)");
+		System.out.println(pager.getStartNum() + "StartNum : 블록의 시작번호");
+		System.out.println(pager.getLastNum()+ "LastNum : 블록의 끝번호");
+		System.out.println(pager.getStartRow() + "StartRow : 불러올 db의 rownum 시작");
+		System.out.println(pager.getLastRow()+ "LastRow : 불러올 db의 rownum 끝");
+		System.out.println(pager.getPerPage()+ "perpage : 페이지 당 출력할 글의 개수  ");
+		System.out.println(pager.getPerBlock()+"perBlock: 페이지에 보여줄 블록의 개수");
 		
-		System.out.println(page);
+		
+		
+		List<BoardDTO> arr = service.getList(pager);
+		
+		System.out.println(pager.getPage() + "Page: 글목록의 페이지 번호 (보내줌)");
+		System.out.println(pager.getStartNum() + "StartNum : 블록의 시작번호");
+		System.out.println(pager.getLastNum()+ "LastNum : 블록의 끝번호");
+		System.out.println(pager.getStartRow() + "StartRow : 불러올 db의 rownum 시작");
+		System.out.println(pager.getLastRow()+ "LastRow : 불러올 db의 rownum 끝");
+		System.out.println(pager.getPerPage()+ "perpage : 페이지 당 출력할 글의 개수  ");
+		System.out.println(pager.getPerBlock()+"perBlock: 페이지에 보여줄 블록의 번호");
+		
 		
 		mv.addObject("list", arr);
+		mv.addObject("pager",pager);
 		mv.setViewName("board/list");
 		
 		return mv;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.board.impl.BoardDTO;
+import com.iu.start.util.Pager;
 
 @Controller
 @RequestMapping("/qna/*")
@@ -26,9 +27,9 @@ public class QnaController {
 	
 	//글 목록 보기
 	@RequestMapping(value = "list.mg", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(value="p",defaultValue = "1") Long page) throws Exception{
+	public ModelAndView getList(Pager pager) throws Exception{
 		
-		List<BoardDTO> list = service.getList(page);
+		List<BoardDTO> list = service.getList(pager);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);

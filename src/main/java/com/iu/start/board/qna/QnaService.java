@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.iu.start.board.impl.BoardDTO;
 import com.iu.start.board.impl.BoardService;
+import com.iu.start.util.Pager;
 
 @Service
 public class QnaService implements BoardService{
@@ -17,20 +18,12 @@ public class QnaService implements BoardService{
 	private QnaDAO dao;
 
 	@Override
-	public List<BoardDTO> getList(Long page) throws Exception {
+	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
-		Long perPage= 15L; //한 페이지에 출력할 목록의 갯수
+		pager.getRowNum();
+		pager.getNum(dao.getCount());
 		
-		Long startRow = ((page-1)*perPage +1);
-		Long lastRow = (page*perPage);
-		
-		
-		Map<String, Long> map = new HashMap<String, Long>();
-		
-		map.put("startRow", startRow);
-		map.put("lastRow", lastRow);
-		
-		return dao.getList(map);
+		return dao.getList(pager);
 	}
 
 	@Override

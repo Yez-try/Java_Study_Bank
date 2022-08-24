@@ -20,13 +20,13 @@
 		<div class="col-10">
 			<p class="h1 fw-bold mb-4 mx-1 mx-md-4 mt-5">${board}List</p>
 		</div>
-		<div class="col">
-			<div class="mb-4 mx-1 mx-md-4 mt-5">
-	        	<button type="button" class="btn btn-dark btn-small">Login</button>
+		<div class="col ">
+			<div class="mb-4 mx-2 mx-md-5 mt-5">
+				<c:if test="${not empty sessionScope.member}">
+		        	<a href="add.mg" role="button" class="btn btn-dark btn-small">글 작성</a>
+				</c:if>
 	        </div>
-			<c:if test="${not empty sessionScope.member }">
-			<a href="add.mg">글 작성하기</a>
-			</c:if>
+			
 		</div>
 		<table class="table table-bordered table-sm table-hover ">
 			<thead class="table-dark table-gradient">
@@ -46,6 +46,33 @@
 				</c:forEach>
 			</tbody>
 		</table>
+			<nav aria-label="Page navigation">
+			  <ul class="pagination justify-content-center">
+			  	<li class="page-item">
+			      <a class="page-link" href="./list.mg?page=1" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="./list.mg?page=${pager.startNum-1}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			    <li class="page-item"><a class="page-link" href="./list.mg?page=${i}">${i}</a></li>
+			    </c:forEach>
+			    <li class="page-item">
+			      <a class="page-link" href="./list.mg?page=${pager.lastNum+1}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="./list.mg?page=${pager.totalPage}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
 	</div>
 </div>
 

@@ -12,18 +12,22 @@ import com.iu.start.MyAbstractTest;
 import com.iu.start.bankAccount.BankAccountDTO;
 import com.iu.start.board.impl.BoardDTO;
 import com.iu.start.board.notice.NoticeDTO;
+import com.iu.start.board.qna.QnaDTO;
 
 public class NoticeDAOTest extends MyAbstractTest{
 
-	private String NAMESPACE = "com.iu.start.board.notice.NoticeDAO.";
+	private String NAMESPACE = "com.iu.start.board.qna.QnaDAO.";
 	
 	@Autowired
 	private SqlSession session;
 	
-	@Test
-	public void getCountTest() throws Exception{
-		System.out.println(session.selectOne(NAMESPACE+"getCount"));
-	}
+//	@Test
+//	public void getCountTest() throws Exception{
+//		
+//		
+//		System.out.println((1-1)/5+1);
+//		System.out.println(session.selectOne(NAMESPACE+"getCount"));
+//	}
 //	
 //	@Test
 //	public void getList() throws Exception {
@@ -33,24 +37,24 @@ public class NoticeDAOTest extends MyAbstractTest{
 //		assertNotNull(ar);
 //	}
 //	
-//	@Test
-//	public void setAddTest() throws Exception {
-//		
-//		for(int i=0;i<100;i++) {
-//			NoticeDTO dto = new NoticeDTO();
-//			
-//			dto.setWriter("idtest2");
-//			dto.setTitle("제목테스트"+i);
-//			dto.setContents("내용테스테스테스트"+i);
-//					
-//			int chk = session.insert(NAMESPACE+"setAdd", dto);
-//
-//			if(i%10==0) {
-//				Thread.sleep(500);
-//			}
-//		}
-//		
-//	}
+	@Test
+	public void setAddTest() throws Exception {
+		
+		for(int i=0;i<100;i++) {
+			QnaDTO dto = new QnaDTO();
+			
+			dto.setWriter("idtest2");
+			dto.setTitle("QNA테스트"+i);
+			dto.setContents("QNA내용"+i);
+					
+			int chk = session.insert(NAMESPACE+"setAdd", dto);
+
+			if(i%10==0) {
+				Thread.sleep(500);
+			}
+		}
+		
+	}
 //	
 //	@Test
 //	public void getDetail() throws Exception {
