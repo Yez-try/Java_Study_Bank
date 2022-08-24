@@ -14,14 +14,22 @@
 	<c:import url="../templetes/header.jsp"></c:import>
 </div>
 
-<h1>${board }list</h1>
-
 
 <div class="container">
-	<div class="row">
-		<table class="table table-bordered table-sm">
-			
-			<thead class="thead-light">
+	<div class="row gx-2">
+		<div class="col-10">
+			<p class="h1 fw-bold mb-4 mx-1 mx-md-4 mt-5">${board}List</p>
+		</div>
+		<div class="col">
+			<div class="mb-4 mx-1 mx-md-4 mt-5">
+	        	<button type="button" class="btn btn-dark btn-small">Login</button>
+	        </div>
+			<c:if test="${not empty sessionScope.member }">
+			<a href="add.mg">글 작성하기</a>
+			</c:if>
+		</div>
+		<table class="table table-bordered table-sm table-hover ">
+			<thead class="table-dark table-gradient">
 				<tr>
 				<th>글번호</th><th>제목</th><th>작성자</th><th>조회수</th><th>작성일자</th>
 				</tr>
@@ -30,7 +38,7 @@
 				<c:forEach items="${list}" var="dto"><!-- BoardDTO인데  noticeDTO를 꺼내옴 -->
 				<tr>
 					<td>${pageScope.dto.num}</td>
-					<td><a href = "./detail.mg?no=${pageScope.dto.num}">${dto.title }</a></td>
+					<td><a href = "./detail.mg?num=${pageScope.dto.num}">${dto.title }</a></td>
 					<td>${dto.writer }</td>
 					<td>${dto.hit }</td>
 					<td>${dto.regDate }</td>
@@ -46,9 +54,8 @@
 
 
 
-
 <div>
-<c:import url="../templetes/footer.jsp"></c:import>
+	<c:import url="../templetes/footer.jsp"></c:import>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

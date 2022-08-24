@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.board.impl.BoardDTO;
@@ -18,15 +20,22 @@ public class NoticeController {
 	@Autowired
 	private NoticeService service;
 	
+	@ModelAttribute("board")
+	public String getBoard() {
+		return "Notice";
+	}
+	
 	//글목록
 	@RequestMapping(value = "list.mg", method = RequestMethod.GET)
-	public ModelAndView getList() throws Exception{
+	public ModelAndView getList(@RequestParam(value="p", defaultValue="1")Long page) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		List<BoardDTO> arr = service.getList();
+		List<BoardDTO> arr = service.getList(page);
+		
+		System.out.println(page);
 		
 		mv.addObject("list", arr);
-		mv.setViewName("notice/list");
+		mv.setViewName("board/list");
 		
 		return mv;
 	}
@@ -36,16 +45,20 @@ public class NoticeController {
 	public String getDetail(BoardDTO boardDTO, Model model) throws Exception{
 		
 		boardDTO = service.getDetail(boardDTO);
-		model.addAttribute("boardDTO", boardDTO);
-		
-		return "notice/detail";
+		model.addAttribute("dto", boardDTO);
+		return "board/detail";
 	}
 	
 	//글작성
 	//입력폼
 	@RequestMapping(value = "add.mg", method = RequestMethod.GET)
-	public void setAdd() throws Exception{
-//		return "notice/add";
+	public ModelAndView setAdd() throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("board", "Notice");
+		mv.setViewName("board/add");
+		return mv;
 	}
 	
 	//DB입력

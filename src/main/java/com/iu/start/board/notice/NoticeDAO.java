@@ -1,6 +1,7 @@
 package com.iu.start.board.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,14 @@ public class NoticeDAO implements BoardDAO{
 	@Autowired
 	private SqlSession session;
 	
+	public Long getCount() throws Exception{
+		
+		return session.selectOne(NAMESPACE+"getCount");
+	}
+	
 	@Override
-	public List<BoardDTO> getList() throws Exception {
-		return session.selectList(NAMESPACE+"getList");
+	public List<BoardDTO> getList(Map<String, Long> map) throws Exception {
+		return session.selectList(NAMESPACE+"getList", map);
 	}
 
 	@Override

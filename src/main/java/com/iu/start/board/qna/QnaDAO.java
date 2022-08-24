@@ -1,6 +1,7 @@
 package com.iu.start.board.qna;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class QnaDAO implements BoardDAO{
 	private SqlSession session;
 
 	@Override
-	public List<BoardDTO> getList() throws Exception {
-		return session.selectList(NAMESPACE+"getList");
+	public List<BoardDTO> getList(Map<String, Long> map) throws Exception {
+		return session.selectList(NAMESPACE+"getList", map);
 	}
 
 	@Override
@@ -40,6 +41,12 @@ public class QnaDAO implements BoardDAO{
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		return session.delete(NAMESPACE+"setDelete", boardDTO);
 	}
+
+	@Override
+	public Long getCount() throws Exception {
+		return null;
+	}
+
 	
 	
 

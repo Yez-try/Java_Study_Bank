@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.board.impl.BoardDTO;
@@ -17,15 +19,20 @@ public class QnaController {
 	@Autowired
 	private QnaService service;
 	
+	@ModelAttribute("board")
+	public String getBoard() {
+		return "Q&A";
+	}
+	
 	//글 목록 보기
 	@RequestMapping(value = "list.mg", method = RequestMethod.GET)
-	public ModelAndView getList() throws Exception{
+	public ModelAndView getList(@RequestParam(value="p",defaultValue = "1") Long page) throws Exception{
 		
-		List<BoardDTO> list = service.getList();
+		List<BoardDTO> list = service.getList(page);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
-		mv.setViewName("qna/list");
+		mv.setViewName("board/list");
 		
 		return mv;
 	}
@@ -38,7 +45,8 @@ public class QnaController {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("dto", dto);
-		mv.setViewName("qna/detail");
+		
+		mv.setViewName("board/detail");
 		
 		return mv;
 	}
@@ -46,8 +54,12 @@ public class QnaController {
 	
 	//글 작성
 	@RequestMapping(value = "add.mg", method = RequestMethod.GET)
-	public String setAdd() throws Exception{
-		return "qna/add";
+	public ModelAndView setAdd() throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("board/add");
+		return mv;
 	}
 	
 	@RequestMapping(value= "add.mg", method = RequestMethod.POST)
