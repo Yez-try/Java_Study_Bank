@@ -20,8 +20,7 @@ public class QnaService implements BoardService{
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
-		pager.getRowNum();
-		pager.getNum(dao.getCount());
+		pager.calNum(dao.getCount());
 		
 		return dao.getList(pager);
 	}

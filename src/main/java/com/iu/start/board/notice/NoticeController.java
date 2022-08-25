@@ -38,7 +38,7 @@ public class NoticeController {
 		System.out.println(pager.getLastRow()+ "LastRow : 불러올 db의 rownum 끝");
 		System.out.println(pager.getPerPage()+ "perpage : 페이지 당 출력할 글의 개수  ");
 		System.out.println(pager.getPerBlock()+"perBlock: 페이지에 보여줄 블록의 개수");
-		
+		System.out.println("--------------------------------------------------------");
 		
 		
 		List<BoardDTO> arr = service.getList(pager);

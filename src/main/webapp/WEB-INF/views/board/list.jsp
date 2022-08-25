@@ -53,17 +53,26 @@
 			        <span aria-hidden="true">&laquo;&laquo;</span>
 			      </a>
 			    </li>
+			    <!-- choose사용해서 해보기 -->
+			    <c:choose>
+			    	<c:when test="${pager.pre}">
+				<li class="page-item disabled">
+			    	</c:when>
+			    	<c:otherwise>
 			    <li class="page-item">
+			    	</c:otherwise>
+			    </c:choose>
 			      <a class="page-link" href="./list.mg?page=${pager.startNum-1}" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
+			        <span aria-hidden="true">이전</span>
 			      </a>
 			    </li>
 			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 			    <li class="page-item"><a class="page-link" href="./list.mg?page=${i}">${i}</a></li>
 			    </c:forEach>
-			    <li class="page-item">
+			    <!-- 삼항연산자 사용해서 해보기 -->
+			    <li class="${pager.next? 'page-item disabled':'page-item'}">
 			      <a class="page-link" href="./list.mg?page=${pager.lastNum+1}" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
+			        <span aria-hidden="true">다음</span>
 			      </a>
 			    </li>
 			    <li class="page-item">
