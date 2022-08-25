@@ -31,26 +31,8 @@ public class NoticeController {
 	public ModelAndView getList(Pager pager) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		System.out.println(pager.getPage() + "Page: 글목록의 페이지 번호 (보내줌)");
-		System.out.println(pager.getStartNum() + "StartNum : 블록의 시작번호");
-		System.out.println(pager.getLastNum()+ "LastNum : 블록의 끝번호");
-		System.out.println(pager.getStartRow() + "StartRow : 불러올 db의 rownum 시작");
-		System.out.println(pager.getLastRow()+ "LastRow : 불러올 db의 rownum 끝");
-		System.out.println(pager.getPerPage()+ "perpage : 페이지 당 출력할 글의 개수  ");
-		System.out.println(pager.getPerBlock()+"perBlock: 페이지에 보여줄 블록의 개수");
-		System.out.println("--------------------------------------------------------");
-		
 		
 		List<BoardDTO> arr = service.getList(pager);
-		
-		System.out.println(pager.getPage() + "Page: 글목록의 페이지 번호 (보내줌)");
-		System.out.println(pager.getStartNum() + "StartNum : 블록의 시작번호");
-		System.out.println(pager.getLastNum()+ "LastNum : 블록의 끝번호");
-		System.out.println(pager.getStartRow() + "StartRow : 불러올 db의 rownum 시작");
-		System.out.println(pager.getLastRow()+ "LastRow : 불러올 db의 rownum 끝");
-		System.out.println(pager.getPerPage()+ "perpage : 페이지 당 출력할 글의 개수  ");
-		System.out.println(pager.getPerBlock()+"perBlock: 페이지에 보여줄 블록의 번호");
-		
 		
 		mv.addObject("list", arr);
 		mv.addObject("pager",pager);
@@ -98,7 +80,7 @@ public class NoticeController {
 		boardDTO = service.getDetail(boardDTO);
 		
 		mv.addObject("boardDTO", boardDTO);
-		mv.setViewName("notice/update");
+		mv.setViewName("board/update");
 		
 		return mv;
 	}

@@ -21,11 +21,14 @@ public class NoticeService implements BoardService{
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
-		Long totalCount = dao.getCount(); //전체 갯수 가져오기
 
 //		pager.getRow(); //mapper에서 사용할 startRow와 lastRow 계산		
 //		pager.getPageBlock(totalCount);  //전체 개수 전달해 페이지수 및 블록 계산하기
+		System.out.println("service getCount 이전"+pager.getSearch());
+		Long totalCount = dao.getCount(pager); //전체 갯수 가져오기
+		System.out.println("service getCount 이후"+pager.getSearch());
 		pager.calNum(totalCount);
+		System.out.println("service 페이지수 계산및 리스트 가져오기"+pager.getSearch());
 
 		return dao.getList(pager);
 	}

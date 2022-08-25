@@ -14,19 +14,58 @@
 	<c:import url="../templetes/header.jsp"></c:import>
 </div>
 
+<div class="container">
+<div class="row gx-2">
+<form action="./list.mg" method = "get" class ="">
+	<div class= "col-12">
+	<label class="visually-hidden" for ="kind">pre</label>
+	<select name="kind" class="form-select" id="kind">
+		<option value="contents">Contents</option>
+		<option value="title">title</option>
+		<option value="writer">writer</option>
+	</select>
+	
+	</div>
+ 	<div class="col-12">
+       <label class="visually-hidden" for="search">검색어</label>
+       <div class="input-group">
+         <input type="text" name="search" class="form-control" id="search" placeholder="SEARCH">
+       </div>
+     </div>
+   
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</div>
+</div>
+
 
 <div class="container">
 	<div class="row gx-2">
-		<div class="col-10">
+		<div class="col-7">
 			<p class="h1 fw-bold mb-4 mx-1 mx-md-4 mt-5">${board}List</p>
 		</div>
-		<div class="col ">
+		<div class="col-3">
+			<div class="input-group mb-4 mx-2 mx-md-5 mt-5">
+			  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">전체</button>
+			  <ul class="dropdown-menu">
+			    <li><a class="dropdown-item" href="#">제목</a></li>
+			    <li><a class="dropdown-item" href="#">내용</a></li>
+			    <li><a class="dropdown-item" href="#">작성자</a></li>
+			    <li><hr class="dropdown-divider"></li>
+			    <li><a class="dropdown-item" href="#">전체</a></li>
+			  </ul>
+			  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+			  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+			</div>
+		</div>
+		<div class="col-2">
 			<div class="mb-4 mx-2 mx-md-5 mt-5">
 				<c:if test="${not empty sessionScope.member}">
 		        	<a href="add.mg" role="button" class="btn btn-dark btn-small">글 작성</a>
 				</c:if>
 	        </div>
-			
 		</div>
 		<table class="table table-bordered table-sm table-hover ">
 			<thead class="table-dark table-gradient">
@@ -38,7 +77,11 @@
 				<c:forEach items="${list}" var="dto"><!-- BoardDTO인데  noticeDTO를 꺼내옴 -->
 				<tr>
 					<td>${pageScope.dto.num}</td>
-					<td><a href = "./detail.mg?num=${pageScope.dto.num}">${dto.title }</a></td>
+					<td>
+					<c:catch>
+					<c:forEach begin="1" end="${dto.depth}">ㅡ</c:forEach>
+					</c:catch>
+					<a href = "./detail.mg?num=${pageScope.dto.num}">${dto.title }</a></td>
 					<td>${dto.writer }</td>
 					<td>${dto.hit }</td>
 					<td>${dto.regDate }</td>
@@ -62,21 +105,21 @@
 			    <li class="page-item">
 			    	</c:otherwise>
 			    </c:choose>
-			      <a class="page-link" href="./list.mg?page=${pager.startNum-1}" aria-label="Previous">
+			      <a class="page-link" href="./list.mg?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
 			        <span aria-hidden="true">이전</span>
 			      </a>
 			    </li>
 			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			    <li class="page-item"><a class="page-link" href="./list.mg?page=${i}">${i}</a></li>
+			    <li class="page-item"><a class="page-link" href="./list.mg?page=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 			    </c:forEach>
 			    <!-- 삼항연산자 사용해서 해보기 -->
 			    <li class="${pager.next? 'page-item disabled':'page-item'}">
-			      <a class="page-link" href="./list.mg?page=${pager.lastNum+1}" aria-label="Next">
+			      <a class="page-link" href="./list.mg?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
 			        <span aria-hidden="true">다음</span>
 			      </a>
 			    </li>
 			    <li class="page-item">
-			      <a class="page-link" href="./list.mg?page=${pager.totalPage}" aria-label="Next">
+			      <a class="page-link" href="./list.mg?page=${pager.totalPage}&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
 			        <span aria-hidden="true">&raquo;&raquo;</span>
 			      </a>
 			    </li>

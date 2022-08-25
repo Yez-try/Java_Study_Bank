@@ -13,13 +13,15 @@
 <body>
 	<c:import url="../templetes/header.jsp"></c:import>
 
-	
 
 	<h1>${dto.title }</h1>
 	작성자 : ${dto.writer } 작성일 : ${dto.regDate } 조회수 : ${dto.hit }
 	<c:if test="${dto.writer eq sessionScope.member.id }">
 	<a href="./update.mg?num=${dto.num}">글 수정</a>
 	<a href="./delete.mg?num=${dto.num}">글 삭제</a>
+	</c:if>
+	<c:if test="${not empty dto and board eq 'Q&A'}">
+		<a href="./reply.mg?num=${dto.num}" class="btn btn-danger">답글 달기</a>
 	</c:if>
 	<hr>
 	${dto.contents}

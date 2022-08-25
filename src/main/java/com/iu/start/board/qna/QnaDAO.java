@@ -17,6 +17,14 @@ public class QnaDAO implements BoardDAO{
 	private String NAMESPACE = "com.iu.start.board.qna.QnaDAO.";
 	@Autowired
 	private SqlSession session;
+	
+	public int setReplyAdd(QnaDTO qnaDTO) throws Exception{
+		return session.insert(NAMESPACE+"setReplyAdd", qnaDTO);
+	}
+	
+	public int setStepUpdate(QnaDTO qnaDTO) throws Exception{
+		return session.update(NAMESPACE+"setStepUpdate", qnaDTO);
+	}
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
@@ -44,8 +52,8 @@ public class QnaDAO implements BoardDAO{
 	}
 
 	@Override
-	public Long getCount() throws Exception {
-		return session.selectOne(NAMESPACE+"getCount");
+	public Long getCount(Pager pager) throws Exception {
+		return session.selectOne(NAMESPACE+"getCount", pager);
 	}
 
 	

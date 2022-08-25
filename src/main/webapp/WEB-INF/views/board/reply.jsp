@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,23 +8,25 @@
 <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-<title>${board} 글수정 페이지</title>
+<title>${board } Reply 작성</title>
 </head>
 <body>
 <c:import url="../templetes/header.jsp"></c:import>
 
-<h1>글 수정 페이지</h1>
+<h1>${board } Reply 작성</h1>
+<hr>
+<form action="./reply.mg" method = "post">
+	<input type="hidden" name="num" value="${dto.num }">
+	제  목 <input type="text" placeholder="제목 입력" name="title"><br>
+	작성자 <input type="text" value=${sessionScope.member.id } readonly="readonly" name="writer">
 	<hr>
-	<form action="./update.mg" method="post">
-	글제목 <br> 
-	<textarea rows="1" cols="100" name ="title">${boardDTO.title }</textarea>
+	내용 입력 <br>
+	<textarea rows="10" cols="100"   name ="contents"></textarea>
 	<br>
-	글내용<br>
-	<textarea rows="10" cols="100" name ="contents">${boardDTO.contents }</textarea>
-	<br>
-	<input type="hidden" value=${boardDTO.num } name="num">
-	<button type="submit">수정하기</button>
-	</form>
+	<button type ="submit">작성완료</button>
+</form>
+
+
 
 
 

@@ -16,11 +16,26 @@ public class QnaService implements BoardService{
 	
 	@Autowired
 	private QnaDAO dao;
+	
+	public int setReply(QnaDTO qnaDTO) throws Exception{
+		
+		System.out.println(qnaDTO.getNum()+"부모 detail 가져오기");
+		QnaDTO parent = (QnaDTO)dao.getDetail(qnaDTO);
+		
+		qnaDTO.setRef(parent.getRef());
+		qnaDTO.setStep(parent.getStep()+1);
+		qnaDTO.setDepth(parent.getDepth()+1);
+		
+		int result = dao.setStepUpdate(parent);
+		int result2 = dao.setReplyAdd(qnaDTO);
+		
+		return 0;
+	}
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
-		pager.calNum(dao.getCount());
+		pager.calNum(dao.getCount(pager));
 		
 		return dao.getList(pager);
 	}

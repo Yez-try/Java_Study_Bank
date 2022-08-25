@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,27 @@ public class QnaController {
 	@ModelAttribute("board")
 	public String getBoard() {
 		return "Q&A";
+	}
+	
+	//답글 작성
+	@GetMapping("reply.mg") //RequestMapping의 GET인 경우 이렇게 줄여쓸수 있다.
+	public ModelAndView setReply(BoardDTO boardDTO) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/reply");
+		
+		mv.addObject("dto",boardDTO);
+		return mv;
+	}
+	
+	@PostMapping("reply.mg")
+	public ModelAndView setReply(QnaDTO qnadto, ModelAndView mv) throws Exception{
+		
+		service.setReply(qnadto);
+		
+		mv.setViewName("redirect:./list.mg");
+		
+		return mv;
 	}
 	
 	//글 목록 보기
@@ -72,13 +95,15 @@ public class QnaController {
 	
 	//글 수정
 	@RequestMapping(value = "update.mg", method = RequestMethod.GET)
-	public void setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception{
-		
+	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception{
+		System.out.println("update Get 페이지 실행");
 		boardDTO = service.getDetail(boardDTO);
 		
-		mv.addObject("dto",boardDTO);
-		mv.setViewName("qna/update");
-	} //모델앤뷰를 되돌려주지 않음 문제 있는지 확인..
+		mv.addObject("boardDTO",boardDTO);
+		mv.setViewName("board/update");
+		
+		return mv;
+	} //모델앤뷰를 되돌려주지 않음 문제 있는지 확인.. 문제 있음!!!
 	
 	@RequestMapping(value = "update.mg", method = RequestMethod.POST)
 	public String setUpdate(BoardDTO boardDTO) throws Exception{
@@ -93,7 +118,7 @@ public class QnaController {
 	public String setDelete(BoardDTO boardDTO) throws Exception{
 		int result = service.setDelete(boardDTO);
 		
-		return "./list.mg";
+		return "redirect: ./list.mg";
 	}
 	
 	
