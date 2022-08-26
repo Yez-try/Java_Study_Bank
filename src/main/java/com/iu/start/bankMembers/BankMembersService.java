@@ -59,6 +59,8 @@ public class BankMembersService {
 	
 	public int setJoin(BankMembersDTO bmdto, MultipartFile photo) throws Exception {
 		
+		int result = dao.setJoin(bmdto);
+		
 		//1. hDD에 파일을 저장
 		// 파일 저장시에 파일의 경로는 Tomcat기준이 아니라 OS의 기준으로 설정
 		// 1) 파일저장 위치
@@ -109,7 +111,7 @@ public class BankMembersService {
 		
 		
 		}//isEmpty 끝
-		return dao.setJoin(bmdto);
+		return result;
 	}
 	
 	public ArrayList<BankMembersDTO> getSearchByID(String search) throws Exception {

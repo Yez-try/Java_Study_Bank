@@ -19,10 +19,12 @@
 	</select>
 	
 	<select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult">
-		SELECT ID, NAME, EMAIL, PHONE, ACNUM, BOOKNUM, ACDATE
-		FROM BANKMEMBERS bm left JOIN BANKACCOUNT ba USING (ID)
-		inner join BANKBOOK bb using (BOOKNUM)
-		WHERE ID=#{id}
+		SELECT bm.ID, bm.NAME, bm.EMAIL, bm.PHONE, ba.ACNUM, bb.BOOKName, ba.ACDATE, mf.filenum, mf.filename
+		FROM BANKMEMBERS bm 
+        left join memberfile MF on (MF.username = bm.id)
+        left JOIN BANKACCOUNT ba on (bm.ID= ba.id)
+		left join BANKBOOK bb using (BOOKNUM)
+		WHERE bm.ID=#{id}
 	</select>
 	
 	<resultMap type="BankMembersDTO" id="getMyPageResult">
@@ -30,6 +32,11 @@
 		<result column="NAME" property="name"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
+
+			 <association property="bankMembersFileDTO" javaType="BankMembersFileDTO">
+		         <id column="FILENUM" property="fileNum"/>
+		         <result column="FILENAME" property="fileName"/>
+		      </association>
 		
 		<!-- 1:N의 관계에서는 collection을 쓴다. -->
 		<collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO">
@@ -39,9 +46,10 @@
 			<association property="bankBookDTO" javaType="BankBookDTO">
 				<result column="BOOKNAME" property="bookname"/>
 			</association>
+			
 		
 		</collection>
-		
+
 	</resultMap>
 	
 </mapper>

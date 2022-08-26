@@ -19,7 +19,7 @@
 	<hr>
 	<div class="row gx-3">
 		<div class="col-2">
-			<img alt="#" src="/resources/img/blank-profile-picture.png">
+			<img alt="#" src="../resources/upload/member/${dto.bankMembersFileDTO.fileName}">
 		</div>
 	</div>
 	
