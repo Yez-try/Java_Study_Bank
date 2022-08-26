@@ -6,9 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<!-- jquery -->
+<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- bootstrap -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
 <title>${board } 작성</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
 </head>
 <body>
 <c:import url="../templetes/header.jsp"></c:import>
@@ -20,7 +27,7 @@
 	작성자 <input type="text" value=${sessionScope.member.id } readonly="readonly" name="writer">
 	<hr>
 	내용 입력 <br>
-	<textarea rows="10" cols="100"   name ="contents"></textarea>
+	<textarea rows="10" cols="100"   name ="contents" id="summernote"></textarea>
 	<br>
 	<button type ="submit">작성완료</button>
 </form>
@@ -29,9 +36,7 @@
 
 
 
-
-<c:import url="../templetes/footer.jsp"></c:import>
-
+<!-- bootStrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 </body>

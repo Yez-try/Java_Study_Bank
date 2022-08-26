@@ -133,7 +133,7 @@
 
 
 
-<div>
+<div class="container">
 	<c:import url="../templetes/footer.jsp"></c:import>
 </div>
 

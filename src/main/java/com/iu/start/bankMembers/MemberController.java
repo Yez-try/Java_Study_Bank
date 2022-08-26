@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.bankAccount.BankAccountDTO;
@@ -122,8 +123,16 @@ public class MemberController {
 	//join post방식
 	//오버로딩: 매개변수가 달라야하므로, HttpServletRequest request 값을 받아준다.
 	@RequestMapping(value = "/member/join.mg", method = RequestMethod.POST)
-	public String join(BankMembersDTO dto, HttpServletRequest request) throws Exception{
+	public String join(BankMembersDTO dto, HttpServletRequest request, MultipartFile photo) throws Exception{
 		System.out.println("회원가입 post 실행");
+		System.out.println(photo);
+		
+		System.out.println("upload 파일명 : "+photo.getOriginalFilename());
+		System.out.println("upload 파라미터명 : "+photo.getName());
+		System.out.println("upload 파일크기:"+photo.getSize());
+		
+		
+		photo.getBytes();
 		
 //		BankMembersDTO dto = new BankMembersDTO();
 
@@ -145,12 +154,12 @@ public class MemberController {
 		System.out.println(request.getAttribute("id"));
 		System.out.println(dto.getId());
 		
-		int chk = 0;
 
-		chk = service.setJoin(dto);
+
+		int result = service.setJoin(dto, photo);
 
 		
-		if(chk == 1) {
+		if(result == 1) {
 			System.out.println("가입성공");
 		}else {
 			System.out.println("가입실패");

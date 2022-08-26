@@ -7,7 +7,7 @@
 <mapper namespace="com.iu.start.bankAccount.BankAccountDAO">
 	<select id="getListById" parameterType="BankMembersDTO" resultMap="getListByIdResult">
 		select ba.acnum, bb.bookname, ba.acdate
-		from bankaccount ba inner JOIN BANKBOOK BB USING (booknum) 
+		from bankaccount BA left JOIN BANKBOOK BB USING (booknum) 
 		where ba.id=#{id}
 	</select>
 	
