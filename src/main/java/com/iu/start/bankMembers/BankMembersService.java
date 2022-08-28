@@ -102,8 +102,8 @@ public class BankMembersService {
 		//회원 한명당 사진 하나올리므로 1:1관계이므로 member에 컬럼을 추가해도 됨
 		//이번엔 만들어서 join하자
 		BankMembersFileDTO membersFileDTO  = new BankMembersFileDTO();
-		membersFileDTO.setFileName(photo.getOriginalFilename());
-		membersFileDTO.setOriName(fileName);
+		membersFileDTO.setFileName(fileName);
+		membersFileDTO.setOriName(photo.getOriginalFilename());
 		membersFileDTO.setUserName(bmdto.getId());
 		dao.setAddFile(membersFileDTO);
 		

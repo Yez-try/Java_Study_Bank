@@ -58,7 +58,6 @@ public class NoticeService implements BoardService{
 		}
 		for (MultipartFile mf:files) {
 			if(mf.isEmpty()) {
-				
 			}
 		}
 		return dao.setAdd(boardDTO);

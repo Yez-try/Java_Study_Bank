@@ -26,6 +26,11 @@
 	제  목 <input type="text" placeholder="제목 입력" name="title"><br>
 	작성자 <input type="text" value=${sessionScope.member.id } readonly="readonly" name="writer">
 	<hr>
+	<div>
+	<input type="file" name="files" class="form-control" >
+	<input type="file" name="files" class="form-control" >
+	<input type="file" name="files" class="form-control" >
+	</div>
 	내용 입력 <br>
 	<textarea rows="10" cols="100"   name ="contents" id="summernote"></textarea>
 	<br>

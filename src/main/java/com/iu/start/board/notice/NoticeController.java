@@ -66,7 +66,11 @@ public class NoticeController {
 	//DB입력
 	@RequestMapping(value = "add.mg", method = RequestMethod.POST)
 	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception{
-		int result = service.setAdd(boardDTO);
+		
+		for (MultipartFile file:files) {
+			System.out.println(file);
+		}
+		int result = service.setAdd(boardDTO,files);
 		
 		ModelAndView mv = new ModelAndView();
 		
