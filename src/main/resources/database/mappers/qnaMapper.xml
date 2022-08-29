@@ -15,6 +15,11 @@
 		like '%'||#{search}||'%'
 	</sql>
 
+	<insert id="setAddFile" parameterType="BoardFileDTO">
+		INSESRT INTO QNAFILE (filenum, num, filename, oriname)
+		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
+
 	<insert id="setReplyAdd" parameterType="QnaDTO">
 		<selectKey order="BEFORE" keyProperty="num" resultType="Long">
 			select BOARD_SEQ.NEXTVAL from DUAL
