@@ -62,12 +62,12 @@ public class NoticeService implements BoardService{
 				continue;
 			}
 			
-			fileManager.saveFile(servletContext, path, multipartFile);
+			String fileName = fileManager.saveFile(servletContext, path, multipartFile);
 			BoardFileDTO boardFileDTO = new BoardFileDTO();
-			boardFileDTO.setFileName(path);
+			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
-			boardFileDTO.setFileNum(boardDTO.getNum());
-			
+			boardFileDTO.setNum(boardDTO.getNum());
+			dao.setAddFile(boardFileDTO);
 		}
 		
 		
@@ -84,7 +84,7 @@ public class NoticeService implements BoardService{
 //			if(mf.isEmpty()) {
 //			}
 //		}
-		return dao.setAdd(boardDTO);
+		return result;
 	}
 
 	@Override

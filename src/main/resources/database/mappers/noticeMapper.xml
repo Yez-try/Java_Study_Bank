@@ -16,7 +16,7 @@
 		LIKE '%'||#{search}||'%' 
 	</sql>
 	<insert id = "setAddFile" parameterType="BoardFileDTO">
-		INSERT INTO NOTICEFILE
+		INSERT INTO NOTICEFILE (filenum, num, filename, oriname)
 		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>
 
@@ -50,7 +50,7 @@
 		<result column="contents" property="contents"/>
 		<result column="regdate" property="regDate"/>
 		<result column="hit" property="hit"/>
-		<collection property="boardFileDTOS" javaType="List" ofType="BoardFileDTO">
+		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
 			<id column="FILENUM" property="fileNum"/>
 			<result column="filename" property="fileName"/>
 			<result column="ORINAME" property="oriName"/>
@@ -58,8 +58,11 @@
 	</resultMap>
 	
 	<insert id="setAdd" parameterType="BoardDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO NOTICE (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT)
-		VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, 0)
+		VALUES (#{num}, #{title}, #{contents}, #{writer}, SYSDATE, 0)
 	</insert>
 	<update id="setUpdate" parameterType="BoardDTO">
 		UPDATE NOTICE SET TITLE=#{title} , CONTENTS=#{contents} WHERE NUM=#{num}
