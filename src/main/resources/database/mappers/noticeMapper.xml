@@ -15,7 +15,10 @@
 		</choose>
 		LIKE '%'||#{search}||'%' 
 	</sql>
-
+	<insert id = "setAddFile" parameterType="BoardFileDTO">
+		INSERT INTO NOTICEFILE
+		VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
 
 	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
 		select num, title, contents, writer, regdate, hit 
@@ -32,9 +35,28 @@
 		where <include refid="search"></include>
 	</select>
 	<!-- 파라미터 타입을 NoticeDTO로 넣으면 안된다. 왜냐하면 한번 더 형변환을 하게 되므로 -->
-	<select id="getDetail" resultType="NoticeDTO" parameterType="BoardDTO"> 
-		SELECT * FROM NOTICE WHERE NUM=#{num}
+	<select id="getDetail" resultMap="getDetailResult" parameterType="BoardDTO"> 
+		SELECT  *
+		FROM NOTICE N
+			LEFT JOIN 
+			NOTICEFILE NF
+			USING(NUM)
+		WHERE NUM=#{num}
 	</select>
+	<resultMap type="NoticeDTO" id="getDetailResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="writer" property="writer"/>
+		<result column="contents" property="contents"/>
+		<result column="regdate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<collection property="boardFileDTOS" javaType="List" ofType="BoardFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="filename" property="fileName"/>
+			<result column="ORINAME" property="oriName"/>
+		</collection>
+	</resultMap>
+	
 	<insert id="setAdd" parameterType="BoardDTO">
 		INSERT INTO NOTICE (NUM, TITLE, CONTENTS, WRITER, REGDATE, HIT)
 		VALUES (BOARD_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, SYSDATE, 0)

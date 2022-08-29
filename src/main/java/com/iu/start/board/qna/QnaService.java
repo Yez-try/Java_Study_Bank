@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.start.board.impl.BoardDTO;
 import com.iu.start.board.impl.BoardService;
@@ -45,10 +48,6 @@ public class QnaService implements BoardService{
 		return dao.getDetail(boardDTO);
 	}
 
-	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception {
-		return dao.setAdd(boardDTO);
-	}
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
@@ -58,6 +57,16 @@ public class QnaService implements BoardService{
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		return dao.setDelete(boardDTO);
+	}
+
+	@Override
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception {
+//		@Override
+//		public int setAdd(BoardDTO boardDTO) throws Exception {
+//			return dao.setAdd(boardDTO);
+//		}
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

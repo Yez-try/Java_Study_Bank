@@ -2,6 +2,8 @@ package com.iu.start.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,7 @@ public class NoticeController {
 	
 	@ModelAttribute("board")
 	public String getBoard() {
-		return "Notice";
+		return "notice";
 	}
 	
 	//글목록
@@ -65,12 +67,11 @@ public class NoticeController {
 	
 	//DB입력
 	@RequestMapping(value = "add.mg", method = RequestMethod.POST)
-	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception{
+	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception{
+		System.out.println("MultipartFile[]을 가져오기");
 		
-		for (MultipartFile file:files) {
-			System.out.println(file);
-		}
-		int result = service.setAdd(boardDTO,files);
+
+		int result = service.setAdd(boardDTO,files, session.getServletContext());
 		
 		ModelAndView mv = new ModelAndView();
 		

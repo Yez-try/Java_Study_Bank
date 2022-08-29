@@ -2,6 +2,8 @@ package com.iu.start.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.board.impl.BoardDTO;
@@ -24,7 +27,7 @@ public class QnaController {
 	
 	@ModelAttribute("board")
 	public String getBoard() {
-		return "Q&A";
+		return "qna";
 	}
 	
 	//답글 작성
@@ -87,8 +90,8 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value= "add.mg", method = RequestMethod.POST)
-	public String setAdd(BoardDTO boardDTO) throws Exception{
-		int chk = service.setAdd(boardDTO);
+	public String setAdd(BoardDTO boardDTO, MultipartFile[] multipartfiles, HttpSession session) throws Exception{
+		int chk = service.setAdd(boardDTO, multipartfiles, session.getServletContext());
 		
 		return "redirect:./list.mg";
 	}

@@ -25,6 +25,14 @@
 	</c:if>
 	<hr>
 	${dto.contents}
+	
+	<div>
+		<c:forEach items ="${dto.boardFileDTOs}" var="fileDTO">
+			<p><!-- p태그는 disply 형식이 block이다. -->
+			<a href="../resources/upload/${board}/${fileDTO.fileName}">${fileDTO.oriName}</a>	
+			</p>	
+		</c:forEach>
+	</div>
 
 
 

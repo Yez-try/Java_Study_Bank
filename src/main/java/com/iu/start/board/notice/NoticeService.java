@@ -13,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.start.board.impl.BoardDAO;
 import com.iu.start.board.impl.BoardDTO;
+import com.iu.start.board.impl.BoardFileDTO;
 import com.iu.start.board.impl.BoardService;
+import com.iu.start.util.FileManager;
 import com.iu.start.util.Pager;
 
 @Service
@@ -21,9 +23,11 @@ public class NoticeService implements BoardService{
 	
 	@Autowired
 	private NoticeDAO dao;
+//	@Autowired 
+//	private ServletContext servletContext; //컨트롤러에서 받아오는 걸로 바꿈
 	@Autowired
-	private ServletContext servletContext;
-
+	private FileManager fileManager;
+	
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
@@ -46,20 +50,40 @@ public class NoticeService implements BoardService{
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception {
 		
-		//1. 실제경로
-		String realPath = servletContext.getRealPath("resources/upload/notice");
+		int result = dao.setAdd(boardDTO);
+		String path = "resources/upload/notice";
 		
-		//2. 폴더 확인
-		File file = new File (realPath);
-		if(!file.exists()) {
-			file.mkdirs();
-		}
-		for (MultipartFile mf:files) {
-			if(mf.isEmpty()) {
+		
+		
+		for(MultipartFile multipartFile:files) {
+			if(multipartFile.isEmpty()) {
+				continue;
 			}
+			
+			fileManager.saveFile(servletContext, path, multipartFile);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(path);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setFileNum(boardDTO.getNum());
+			
 		}
+		
+		
+		
+//		//1. 실제경로
+//		String realPath = servletContext.getRealPath("resources/upload/notice");
+//		
+//		//2. 폴더 확인
+//		File file = new File (realPath);
+//		if(!file.exists()) {
+//			file.mkdirs();
+//		}
+//		for (MultipartFile mf:files) {
+//			if(mf.isEmpty()) {
+//			}
+//		}
 		return dao.setAdd(boardDTO);
 	}
 

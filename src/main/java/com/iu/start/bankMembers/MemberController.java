@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -123,7 +124,7 @@ public class MemberController {
 	//join post방식
 	//오버로딩: 매개변수가 달라야하므로, HttpServletRequest request 값을 받아준다.
 	@RequestMapping(value = "/member/join.mg", method = RequestMethod.POST)
-	public String join(BankMembersDTO dto, HttpServletRequest request, MultipartFile photo) throws Exception{
+	public String join(BankMembersDTO dto, HttpServletRequest request, MultipartFile photo,HttpSession session) throws Exception{
 		System.out.println("회원가입 post 실행");
 		System.out.println(photo);
 		
@@ -156,7 +157,7 @@ public class MemberController {
 		
 
 
-		int result = service.setJoin(dto, photo);
+		int result = service.setJoin(dto, photo, session.getServletContext());
 
 		
 		if(result == 1) {
