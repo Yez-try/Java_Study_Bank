@@ -20,16 +20,17 @@
 	<div class= "col-12">
 	<label class="visually-hidden" for ="kind">pre</label>
 	<select name="kind" class="form-select" id="kind">
-		<option value="contents">Contents</option>
-		<option value="title">title</option>
-		<option value="writer">writer</option>
+		<option class="kinds" value="contents">Contents</option>
+		<option class="kinds" value="title">title</option>
+		<option class="kinds" value="writer">writer</option>
 	</select>
 	
 	</div>
  	<div class="col-12">
        <label class="visually-hidden" for="search">검색어</label>
        <div class="input-group">
-         <input type="text" name="search" class="form-control" id="search" placeholder="SEARCH">
+       	<!-- 파라미터 값을 꺼내서 써보자 -->
+         <input type="text" name="search" value="${param.search}" class="form-control" id="search" placeholder="SEARCH">
        </div>
      </div>
    
@@ -136,7 +137,17 @@
 <div class="container">
 	<c:import url="../templetes/footer.jsp"></c:import>
 </div>
-
+<script src="/resources/js/board.js"></script>
+<script>
+	const kinds = document.getElementsByClassName("kinds")
+	let k = '${param.kind}'//title, writer, contents 등의 값이 들어갈 수 있음
+	for(let i=0; i<kinds.length;i++){
+		if(kinds[i].value == k){
+			kinds[i].selected = true
+			break;
+		}
+	}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>
