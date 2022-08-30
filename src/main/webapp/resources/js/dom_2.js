@@ -27,7 +27,7 @@ d3.innerHTML = html_text;
 let year = document.getElementById("year");
 
 let optionY = "";
-for(let i=1900;i<=2022;i++){
+for(let i=2022;i>=1900;i--){
     optionY += "<option>"+i+"년</option>";
 }
 year.innerHTML = optionY;
