@@ -27,34 +27,38 @@
 	
 	                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 	
-	                <form class="mx-1 mx-md-4" action="./login.mg" method="post">
+	                <form class="mx-1 mx-md-4" action="./login.mg" method="post" id="loginform">
 	
 	                  <div class="d-flex flex-row align-items-center mb-4">
 	                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
 	                    <div class="form-outline flex-fill mb-0">
 	                      <label class="form-label" for="id"> ID</label>
-	                      <input type="text" name="id" class="form-control" />
+	                      <input type="text" name="id" id="inputid" class="form-control" />
 	                    </div>
-	                  </div>
+					 </div>
+					
 	                  
 	                  <div class="d-flex flex-row align-items-center mb-4">
 	                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
 	                    <div class="form-outline flex-fill mb-0">
 	                      <label class="form-label" for="form3Example4c">Password</label>
-	                      <input type="password" name=pw class="form-control" />
+	                      <input type="password" name=pw id="inputpw" class="form-control" />
 	                    </div>
 	                  </div>
 	
 	
-	                  <div class="form-check d-flex justify-content-center mb-5">
+	                  <div class="form-check d-flex justify-content-center mb-4">
 	                    <input class="form-check-input me-2" type="checkbox" name="remind" id="form2Example3c" />
 	                    <label class="form-check-label" for="form2Example3">
 	                      아이디 저장
 	                    </label>
 	                  </div>
+					  <div id="validation" class="mb-5">
+				        
+				      </div>
 	
 	                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-	                    <button type="submit" class="btn btn-dark btn-lg">Login</button>
+	                    <button type="button" class="btn btn-dark btn-lg" id="loginbtn">Login</button>
 	                  </div>
 	
 	                </form>
@@ -74,6 +78,6 @@
    </div>
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    	
+    <script src="/resources/js/member.js"></script>
 </body>
 </html>
