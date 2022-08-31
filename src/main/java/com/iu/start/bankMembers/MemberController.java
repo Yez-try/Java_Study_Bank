@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,11 @@ public class MemberController {
 	private BankMembersService service;	
 	@Autowired
 	private BankAccountService accountService;
+	
+	@GetMapping("joinAgre.mg")
+	public void joinAgre() throws Exception{
+		System.out.println("joinAgre페이지 실행");
+	}
 	
 	@RequestMapping(value = "myPage.mg", method=RequestMethod.GET)
 	public ModelAndView myPage(HttpSession session) throws Exception{
@@ -112,10 +118,18 @@ public class MemberController {
 	// 메서드명 join (Get)
 	// url주소 루트/member/join
 	@RequestMapping(value = "/member/join.mg", method = RequestMethod.GET)
-	public String join() {
+	public String join(String agre1, String agre2) {
 		System.out.println("회원가입 실행");
 		
-		return "member/join"; //jsp의 경로명을 작성해준다. 기존과 달리 views아래부터 시작하고 jsp는 생략해준다.
+		if(agre1.equals("true")&&agre2.equals("true")) {
+			return "member/join";
+		}else if(agre1==null ||agre2==null){
+			return "member/joinAgre";	
+		}
+		
+		return "member/joinAgre";	
+		
+	
 		// 경로설정 파일은 servlet-context.xml에 있다.
 	}
 	

@@ -22,7 +22,7 @@
 	      	<c:choose>
 	      		<c:when test="${empty sessionScope.member}">
 			        <a class="nav-link active" aria-current="page" href="/member/login.mg">로그인</a>
-			        <a class="nav-link" href="/member/join.mg">회원가입</a>
+			        <a class="nav-link" href="/member/joinAgre.mg">회원가입</a>
 	        	</c:when>
 	        	<c:otherwise>
 	        		<a class="nav-link" href="/member/logout.mg">로그아웃</a>
