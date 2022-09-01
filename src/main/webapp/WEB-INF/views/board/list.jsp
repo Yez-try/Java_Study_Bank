@@ -14,55 +14,27 @@
 	<c:import url="../templetes/header.jsp"></c:import>
 </div>
 
-<div class="container">
-<div class="row gx-2">
-<form action="./list.mg" method = "get" class ="">
-	<div class= "col-12">
-	<label class="visually-hidden" for ="kind">pre</label>
-	<select name="kind" class="form-select" id="kind">
-		<option class="kinds" value="contents">Contents</option>
-		<option class="kinds" value="title">title</option>
-		<option class="kinds" value="writer">writer</option>
-	</select>
-	
-	</div>
- 	<div class="col-12">
-       <label class="visually-hidden" for="search">검색어</label>
-       <div class="input-group">
-       	<!-- 파라미터 값을 꺼내서 써보자 -->
-         <input type="text" name="search" value="${param.search}" class="form-control" id="search" placeholder="SEARCH">
-       </div>
-     </div>
-   
-    <div class="col-12">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
-</div>
-</div>
-
 
 <div class="container">
 	<div class="row gx-2">
 		<div class="col-7">
-			<p class="h1 fw-bold mb-4 mx-1 mx-md-4 mt-5">${board}List</p>
+			<p class="h1 fw-bold mb-2 mx-1 mx-md-4 mt-4">${board}List</p>
 		</div>
-		<div class="col-3">
-			<div class="input-group mb-4 mx-2 mx-md-5 mt-5">
-			  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">전체</button>
-			  <ul class="dropdown-menu">
-			    <li><a class="dropdown-item" href="#">제목</a></li>
-			    <li><a class="dropdown-item" href="#">내용</a></li>
-			    <li><a class="dropdown-item" href="#">작성자</a></li>
-			    <li><hr class="dropdown-divider"></li>
-			    <li><a class="dropdown-item" href="#">전체</a></li>
-			  </ul>
-			  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-			  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+		<div class="col-4">
+		<form action="./list.mg" method = "get" class ="">
+			<div class="input-group mt-5">
+				<select name="kind" class="form-select" id="kind">
+					<option class="kinds" value="contents">Contents</option>
+					<option class="kinds" value="title">title</option>
+					<option class="kinds" value="writer">writer</option>
+				</select>
+				<input type="text" name="search" value="${param.search}" class="form-control" id="search" placeholder="SEARCH">
+			  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
 			</div>
+		</form>
 		</div>
-		<div class="col-2">
-			<div class="mb-4 mx-2 mx-md-5 mt-5">
+		<div class="col-1">
+			<div class="mb-4 mt-5">
 				<c:if test="${not empty sessionScope.member}">
 		        	<a href="add.mg" role="button" class="btn btn-dark btn-small">글 작성</a>
 				</c:if>

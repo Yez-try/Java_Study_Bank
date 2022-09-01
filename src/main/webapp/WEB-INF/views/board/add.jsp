@@ -26,10 +26,9 @@
 	제  목 <input type="text" placeholder="제목 입력" name="title"><br>
 	작성자 <input type="text" value=${sessionScope.member.id } readonly="readonly" name="writer">
 	<hr>
-	<div>
-	<input type="file" name="files" class="form-control" >
-	<input type="file" name="files" class="form-control" >
-	<input type="file" name="files" class="form-control" >
+		<button type = "button" id="fileAdd">파일 추가</button>
+	<div id="addFiles">
+
 	</div>
 	내용 입력 <br>
 	<textarea rows="10" cols="100"   name ="contents" id=""></textarea>
@@ -43,6 +42,7 @@
 
 <!-- bootStrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+<script src="/resources/js/board.js"></script>
+<script>addjs()</script>
 </body>
 </html>
