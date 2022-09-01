@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #d1{width: 600px;
+            height: 600px;
+            background-color: brown;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        #d1_1{width: 150px;
+            height: 150px;
+            background-color: yellow;
+            margin: 200px auto; /*좌우를 auto로 중앙으로 보낸다*/ 
+            /*50px은 top의 마진을 의미하지만 부모에 overflow값을 주지 않으면 먹히지 않는다 (버그같은거임)*/
+
+        }
+
+        #result{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--숫자를 입력하고 버튼을 클릭하면 입력된 숫자만큼 div 내에 button 태그 생성 class="c1" 공통으로 생성해준다.-->
+    <input type="text" id="count">
+    <button id="btn">CLICK</button>
+
+    <div id="result">
+        <button class="c1">CLICK</button>
+    </div>
+
+    
+
+    <!--가독을 위해 범위와 색지정(brown)-->
+    <div id = "d1">
+        <div id="d1_1">
+            <button id="d1_1_1" class = "buttons">BuTTON</button>
+        </div>
+    </div>
+
+
+    <div>
+        <a href="https://www.google.com" id="google">GOOGLE</a>
+    </div>
+
+
+    <script src="/resources/js/dom_8.js"></script>
+</body>
+</html>
