@@ -8,9 +8,15 @@ function addjs(){
     const addFiles = document.getElementById("addFiles")
 
     let countfiles = 0;
-
+    
     fileAdd.addEventListener("click",function(){
         if(countfiles<5){
+            
+            //부모 Element div생성
+            let pdiv = document.createElement("div")
+            let c = document.createAttribute("id")
+            c.value = "file"+countfiles
+            pdiv.setAttributeNode(c)
 
             //라벨만들기
             let lb = document.createElement("label")
@@ -19,7 +25,7 @@ function addjs(){
             lb.setAttributeNode(al)
             lb.innerText="파일첨부"
     
-            addFiles.append(lb)
+            pdiv.append(lb)
             //input 태그 만들기
             let inputfile = document.createElement("input")
             let typei = document.createAttribute("type")
@@ -33,12 +39,47 @@ function addjs(){
             inputfile.setAttributeNode(typei2)
             inputfile.setAttributeNode(typei3)
             
-            addFiles.append(inputfile)
+            pdiv.append(inputfile)
+
+            //삭제 버튼 만들기
+            let plusbutton = document.createElement("button")
+            let btnType = document.createAttribute("type")
+            btnType.value = "button"
+            let btnClass = document.createAttribute("class")
+            btnClass.value = "del btn-dark btn-small"
+            let btnContents = document.createTextNode("삭제")
+            plusbutton.setAttributeNode(btnType)
+            plusbutton.setAttributeNode(btnClass)
+            plusbutton.appendChild(btnContents)
+
+            let buttonAttr = document.createAttribute("title")
+            buttonAttr.value = countfiles;
+            plusbutton.setAttributeNode(buttonAttr);
+
+            pdiv.append(plusbutton)
+
+            //pdiv를 addfiles div에 append
+            addFiles.append(pdiv)
+
+            //추가된 파일 갯수 cnt증가
             countfiles = countfiles + 1;
         }else{
             alert("파일추가는 5개까지만 가능합니다.")
         }
 
+    })//파일 추가 버튼 클릭시 이벤트 종료
+
+    addFiles.addEventListener("click", function(event){
+        console.log("div click")
+        console.log(event.target)
+        console.log(event.currentTarget)
+
+        if(event.target.classList[0] =="del"){
+            alert(event.target.title)
+
+            const divdel = document.getElementById("file"+event.target.title)
+            addFiles.removeChild(divdel)
+        }
     })
 
 

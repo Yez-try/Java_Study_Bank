@@ -28,7 +28,7 @@
 	<hr>
 		<button type = "button" id="fileAdd">파일 추가</button>
 	<div id="addFiles">
-
+		<!-- 파일 추가 버튼 생성 영역 -->
 	</div>
 	내용 입력 <br>
 	<textarea rows="10" cols="100"   name ="contents" id=""></textarea>
