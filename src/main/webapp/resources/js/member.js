@@ -32,20 +32,12 @@ function loginjs(){
 }
 
 function joinAgrejs(){
-    // const all = document.getElementById("all");
-    const all = document.querySelector("#all");
+    const all = document.getElementById("all");
     // const cb = document.getElementsByClassName("cb");
     const cb = document.querySelectorAll(".cb"); //클래스를 의미하는 .을 붙여준다.
     const joinAgrebtn = document.getElementById("joinAgrebtn");
     const agreform = document.getElementById("agreform");
     const req = document.getElementsByClassName("req");
-
-	//전체동의체크 및 해제
-    all.addEventListener("click", function(){
-        for(let i=0;i<cb.length;i++){
-            cb[i].checked=all.checked;
-        }
-    })
 
 	console.log("foreach"); 
 	//클래스 네임으로 가져온 cb변수는 배열이 아닌 유사배열임.(실제 배열이 아님) 그러므로 forEach가 없음
@@ -54,17 +46,19 @@ function joinAgrejs(){
 		console.log(v);
 	});
 
+	//전체동의체크 및 해제
+    all.addEventListener("click", function(){
+        for(let i=0;i<cb.length;i++){
+            cb[i].checked=all.checked;
+        }
+    })
 
+	//개별동의버튼 클릭해제시
     for(let i=0;i<cb.length;i++){
         cb[i].addEventListener("click", function(){
-            let result = true;
-            for(let i=0;i<cb.length;i++){
-                if(!cb[i].checked){
-                    result=false
-                    break;
-                }
+            if(!cb[i].checked){
+                all.checked=false
             }
-            all.checked = result
         })
     }
 
