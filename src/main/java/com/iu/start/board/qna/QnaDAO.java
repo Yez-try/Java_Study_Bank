@@ -59,8 +59,7 @@ public class QnaDAO implements BoardDAO{
 
 	@Override
 	public int setAddFile(BoardFileDTO boardFileDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert(NAMESPACE+"setAddFile", boardFileDTO);
 	}
 
 	

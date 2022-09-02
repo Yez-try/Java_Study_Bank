@@ -91,7 +91,7 @@ public class QnaController {
 	
 	@RequestMapping(value= "add.mg", method = RequestMethod.POST)
 	public String setAdd(BoardDTO boardDTO, MultipartFile[] multipartfiles, HttpSession session) throws Exception{
-		int chk = service.setAdd(boardDTO, multipartfiles, session.getServletContext());
+		int result = service.setAdd(boardDTO, multipartfiles, session.getServletContext());
 		
 		return "redirect:./list.mg";
 	}

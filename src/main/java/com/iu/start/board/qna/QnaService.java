@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.start.board.impl.BoardDTO;
+import com.iu.start.board.impl.BoardFileDTO;
 import com.iu.start.board.impl.BoardService;
+import com.iu.start.util.FileManager;
 import com.iu.start.util.Pager;
 
 @Service
@@ -19,6 +21,8 @@ public class QnaService implements BoardService{
 	
 	@Autowired
 	private QnaDAO dao;
+	@Autowired
+	private FileManager filemanager;
 	
 	public int setReply(QnaDTO qnaDTO) throws Exception{
 		
@@ -61,13 +65,24 @@ public class QnaService implements BoardService{
 
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception {
-//		@Override
-//		public int setAdd(BoardDTO boardDTO) throws Exception {
-//			return dao.setAdd(boardDTO);
-//		}
-		// TODO Auto-generated method stub
-		return 0;
+		int result = dao.setAdd(boardDTO);
+		String path = "resources/upload/qna";
+		
+		for(MultipartFile file:files) {
+			if(file.isEmpty()) {
+				continue;
+			}
+			String fileName = filemanager.saveFile(servletContext, path, file);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(file.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+			dao.setAddFile(boardFileDTO);
+		}
+			
+		return result;
 	}
+	
 	
 	
 
