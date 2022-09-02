@@ -8,6 +8,7 @@ function addjs(){
     const addFiles = document.getElementById("addFiles")
 
     let countfiles = 0;
+    let idx = 0;
     
     fileAdd.addEventListener("click",function(){
         if(countfiles<5){
@@ -15,7 +16,7 @@ function addjs(){
             //부모 Element div생성
             let pdiv = document.createElement("div")
             let c = document.createAttribute("id")
-            c.value = "file"+countfiles
+            c.value = "file"+idx
             pdiv.setAttributeNode(c)
 
             //라벨만들기
@@ -53,7 +54,7 @@ function addjs(){
             plusbutton.appendChild(btnContents)
 
             let buttonAttr = document.createAttribute("title")
-            buttonAttr.value = countfiles;
+            buttonAttr.value = idx;
             plusbutton.setAttributeNode(buttonAttr);
 
             pdiv.append(plusbutton)
@@ -63,6 +64,7 @@ function addjs(){
 
             //추가된 파일 갯수 cnt증가
             countfiles = countfiles + 1;
+            idx++
         }else{
             alert("파일추가는 5개까지만 가능합니다.")
         }
@@ -70,15 +72,18 @@ function addjs(){
     })//파일 추가 버튼 클릭시 이벤트 종료
 
     addFiles.addEventListener("click", function(event){
-        console.log("div click")
-        console.log(event.target)
-        console.log(event.currentTarget)
 
-        if(event.target.classList[0] =="del"){
+        let button = event.target;
+
+        if(button.classList[0] =="del"){
             alert(event.target.title)
 
             const divdel = document.getElementById("file"+event.target.title)
             addFiles.removeChild(divdel)
+            
+            countfiles--;
+            
+            
         }
     })
 
