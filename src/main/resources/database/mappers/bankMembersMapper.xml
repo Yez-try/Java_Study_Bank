@@ -7,6 +7,10 @@
 
 <mapper namespace="com.iu.start.bankMembers.BankMembersDAO">
 
+	<insert id="setJoin" parameterType="BankMembersDTO">
+		insert into bankmembers (ID,PW,name, email,phone, lv) values (#{id}, #{pw}, #{name}, #{email}, #{phone}, #{lv})
+	</insert>
+
 	<insert id="setAddFile" parameterType="BankMembersFileDTO">
 		insert into MEMBERFILE values (file_seq.nextval, #{fileName}, #{oriName}, #{userName})
 	</insert>
