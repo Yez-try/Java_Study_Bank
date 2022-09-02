@@ -29,7 +29,7 @@ google.addEventListener("click", function(event){
 d1.addEventListener("click", function(event){
     console.log("d1 click")
     console.log(event) //target실제 누른 영역이 어디냐
-    console.log(event.currentTarget) //부모영영
+    console.log(event.currentTarget) //부모영역
     console.log(event.target) //내가 누른영역
 
     if(event.target.className=="buttons"){ //이벤트 위임 (부모영역에 click 이벤트를 주고 , 내부에 자식 내용을 만든다)
