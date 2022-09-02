@@ -32,23 +32,39 @@ function loginjs(){
 }
 
 function joinAgrejs(){
-    const all = document.getElementById("all");
-    const cb = document.getElementsByClassName("cb");
+    // const all = document.getElementById("all");
+    const all = document.querySelector("#all");
+    // const cb = document.getElementsByClassName("cb");
+    const cb = document.querySelectorAll(".cb"); //클래스를 의미하는 .을 붙여준다.
     const joinAgrebtn = document.getElementById("joinAgrebtn");
     const agreform = document.getElementById("agreform");
     const req = document.getElementsByClassName("req");
 
+	//전체동의체크 및 해제
     all.addEventListener("click", function(){
         for(let i=0;i<cb.length;i++){
             cb[i].checked=all.checked;
         }
     })
 
+	console.log("foreach"); 
+	//클래스 네임으로 가져온 cb변수는 배열이 아닌 유사배열임.(실제 배열이 아님) 그러므로 forEach가 없음
+	//getElementsByClassName 말고 querySelectorAll을 사용하면 배열로 리턴해줌
+	cb.forEach(function(v,i,ar){ 
+		console.log(v);
+	});
+
+
     for(let i=0;i<cb.length;i++){
         cb[i].addEventListener("click", function(){
-            if(!cb[i].checked){
-                all.checked=false
+            let result = true;
+            for(let i=0;i<cb.length;i++){
+                if(!cb[i].checked){
+                    result=false
+                    break;
+                }
             }
+            all.checked = result
         })
     }
 
