@@ -75,7 +75,15 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("redirect:./list.mg");
+		String message = "글작성 실패";
+		String url = "./list.mg";
+		if(result==1) {
+			message = "글작성 성공";
+		}
+		mv.addObject("message", message);
+		mv.setViewName("/common/result");
+		mv.addObject("url", url);
+		
 		
 		return mv;
 	}

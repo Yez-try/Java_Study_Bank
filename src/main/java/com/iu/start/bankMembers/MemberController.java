@@ -99,8 +99,10 @@ public class MemberController {
 	} 
 	
 	@RequestMapping(value = "login.mg", method=RequestMethod.POST)
-	public String login(HttpSession session /*HttpServletRequest request*/, BankMembersDTO dto, Model model) throws Exception {
+	public ModelAndView login(HttpSession session /*HttpServletRequest request*/, BankMembersDTO dto, Model model) throws Exception {
 		System.out.println("db에 로그인 실행");
+		
+		ModelAndView mv = new ModelAndView();
 		
 		dto = service.getLogin(dto);
 //		model.addAttribute("member", dto); //이렇게 해도 메인페이지에서는 member를 받아오지 못한다. 우리가 리다이렉트로 주소값을 반환하므로
@@ -109,9 +111,21 @@ public class MemberController {
 //		HttpSession session = request.getSession();
 		session.setAttribute("member", dto);
 		
+		int result = 0;
+		String message = "로그인 실패";
+		String url = "./login.mg";
+		if(dto!=null) {
+			result = 1;
+			message = "로그인 성공";
+			url = "../";
+		}
 		
+		mv.addObject("result", result);
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result"); //포워드로 보낸다 (webinf/views/common/result.jsp로 보낸다.)
 		System.out.println(dto);
-		return "redirect:../";
+		return mv;
 	} 
 	
 	
