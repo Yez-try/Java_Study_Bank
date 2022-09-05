@@ -28,20 +28,27 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletResponse response) {
+		try {
+			Thread.sleep(10000);//10초 동안 기다려라
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		//쿠키를 만들어보자
-		Cookie cookie = new Cookie("hi","hello");
-		cookie.setMaxAge(600); //초단위를 의미함
-		response.addCookie(cookie);
-		
+//		
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//		
+//		String formattedDate = dateFormat.format(date);
+//		
+//		model.addAttribute("serverTime", formattedDate );
+//		
+//		//쿠키를 만들어보자
+//		Cookie cookie = new Cookie("hi","hello");
+//		cookie.setMaxAge(600); //초단위를 의미함
+//		response.addCookie(cookie);
+//		
 		
 		return "home";
 	}
