@@ -6,10 +6,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.iu.start.util.DBConnector;
 
 public class BankBookDAO implements BookDAO{
 	
+	private final String NAMESPACE = "com.iu.start.bankbook.BankBookDAO.";
+	@Autowired
+	private SqlSession session;
+	
+	public int setComment(BankBookCommentDTO paramDTO) throws Exception{
+		return session.insert(NAMESPACE+"setComment", paramDTO);
+	}
 	
 	@Override
 	public ArrayList<BankBookDTO> getList() throws Exception {
