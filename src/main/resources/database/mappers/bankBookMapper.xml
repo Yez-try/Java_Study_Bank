@@ -7,7 +7,7 @@
 <mapper namespace="com.iu.start.bankbook.BankBookDAO">
 	<insert id="setComment" parameterType="BankBookCommentDTO">
 		insert into bb_comment (num, booknum, writer, contents, regDate)
-		values (Board_seq.nextval, #{bookNum}, #{writer}, #{contents}, sysdate
+		values (Board_seq.nextval, #{bookNum}, #{writer}, #{contents}, sysdate)
 	</insert>
 
 </mapper>

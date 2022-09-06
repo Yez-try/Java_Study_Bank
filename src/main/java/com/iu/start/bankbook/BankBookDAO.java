@@ -8,9 +8,11 @@ import java.util.Calendar;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.iu.start.util.DBConnector;
 
+@Repository
 public class BankBookDAO implements BookDAO{
 	
 	private final String NAMESPACE = "com.iu.start.bankbook.BankBookDAO.";
