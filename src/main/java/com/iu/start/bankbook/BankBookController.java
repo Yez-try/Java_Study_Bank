@@ -1,6 +1,7 @@
 package com.iu.start.bankbook;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,10 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.iu.start.util.CommentPager;
+import com.iu.start.util.Pager;
 
 @Controller
 @RequestMapping(value = "/bankbook/*")
@@ -20,10 +26,41 @@ public class BankBookController {
 	@Autowired
 	private BankBookService service;
 	
-	@PostMapping("commentAdd")
-	public void setCommentAdd(BankBookCommentDTO paramdto) throws Exception{
-		int result = service.setCommentAdd(paramdto);
+	
+	@GetMapping("commentList")
+	@ResponseBody
+	public List<BankBookCommentDTO> getCommentList(CommentPager pager/*pager내에 page와 booknum이 들어있음*/) throws Exception{
+		System.out.println("commentList 실행");
+		//1. JSP에 출력하고 결과물을 응답으로 전송
+//		ModelAndView mv =  new ModelAndView();
+//		List<BankBookCommentDTO> ar = service.getCommentList(pager);
+//		
+//		mv.addObject("commentlist", ar);
+//		mv.setViewName("common/commentlist");
+//
+//		
+//		return mv;
 		
+		//2. JSON으로 보내주기
+		// pom.xml에  jackson-databind 패키지를 넣어준 후
+		// responseBody 어노테이션으로 바로 리턴
+		
+		return service.getCommentList(pager);
+	}
+	
+	@PostMapping("commentAdd")
+	@ResponseBody //응답으로 return 하는 애들을 전부 body로 받아와서 return 하겠다
+	public String setCommentAdd(BankBookCommentDTO paramdto) throws Exception{
+		System.out.println("commentAdd실행");
+		
+		int result = service.setCommentAdd(paramdto);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("result", result);
+		
+//		mv.setViewName("common/ajaxResult"); //jsp로 보내는 방법: 해당 jsp의 모든 html이 저장된다.
+		String jsonResult = "{\"result\":\""+result+"\"}";
+		
+		return jsonResult;
 	}
 	
 	@RequestMapping(value = "delete.mg", method = RequestMethod.GET)

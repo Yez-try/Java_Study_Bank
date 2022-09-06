@@ -5,12 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.iu.start.util.CommentPager;
 import com.iu.start.util.DBConnector;
+import com.iu.start.util.Pager;
 
 @Repository
 public class BankBookDAO implements BookDAO{
@@ -18,6 +21,10 @@ public class BankBookDAO implements BookDAO{
 	private final String NAMESPACE = "com.iu.start.bankbook.BankBookDAO.";
 	@Autowired
 	private SqlSession session;
+	
+	public List<BankBookCommentDTO> getCommentList(CommentPager pager) throws Exception{
+		return session.selectList(NAMESPACE+"getCommentList", pager);
+	}
 	
 	public int setComment(BankBookCommentDTO paramDTO) throws Exception{
 		return session.insert(NAMESPACE+"setComment", paramDTO);
