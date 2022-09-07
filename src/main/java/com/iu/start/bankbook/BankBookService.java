@@ -14,15 +14,27 @@ public class BankBookService {
 	@Autowired
 	private BankBookDAO dao;
 	
+	public int updateCmt(BankBookCommentDTO paramDTO) throws Exception{
+		return dao.updateCmt(paramDTO);
+	}
+	
 	public int setCommentAdd(BankBookCommentDTO paramDTO) throws Exception {
 		return dao.setComment(paramDTO);
 	}
 	
 	public  List<BankBookCommentDTO> getCommentList(CommentPager pager) throws Exception{
-		pager.getRow();
+		Long totalcnt = (long)dao.getCmtTotal(pager);
+		
+		pager.calNum(totalcnt);
+		
+		System.out.println("startNum");
+		System.out.println("lastNum");
 		
 		return dao.getCommentList(pager);
-		
+	}
+	
+	public int delCmt(Long num) throws Exception{
+		return dao.delCmt(num);
 	}
 	
 }

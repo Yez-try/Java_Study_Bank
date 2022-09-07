@@ -5,6 +5,19 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
 <mapper namespace="com.iu.start.bankbook.BankBookDAO">
+
+	<update id="updateCmt" parameterType="BankBookCommentDTO">
+		update BB_COMMENT set contents= #{contents} where num = #{num} 
+	</update>
+	
+	<delete id="delCmt" parameterType="Long">
+		delete BB_COMMENT where num = #{num}
+	</delete>
+
+	<select id="getCmtTotal" resultType="Integer" parameterType="CommentPager">
+		select count(*) from BB_COMMENT where booknum = #{booknum}
+	</select>
+
 	<select id="getCommentList" parameterType="CommentPager" resultType="BankBookCommentDTO">
 		select * from 
 			(select rownum rn , c.* from

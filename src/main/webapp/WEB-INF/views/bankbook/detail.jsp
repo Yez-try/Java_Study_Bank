@@ -11,6 +11,8 @@
 </head>
 <body>
 <c:import url="../templetes/header.jsp"></c:import>
+<section class="container-fluid con-lg-7">
+	<div class="row">
 	<h1> Bankbook detail</h1>
 	<hr>
 	<!-- 상대경로 -->
@@ -40,6 +42,13 @@
 	</table>
 
 	<hr>
+
+	<a href="./list.mg">리스트 보기</a>
+	<a href="./update.mg?booknum=${detail.booknum}">수정</a>
+	<a href="./delete.mg?booknum=${detail.booknum}">삭제</a>
+   <c:if test = "${not empty sessionScope.member }">
+   <a href="../bankAccount/add.mg?booknum=${detail.booknum}">가입하기</a>
+   </c:if>
 	<!--Comment 영역-->
 	<div class="row">
 		<!--form으로 보내면 동기방식, 페이지를 보내버리므로 지금은 form 태그나 name태그가 필요없다-->
@@ -57,18 +66,51 @@
 	</div>
 	<!--Comment 끝-->
 	<!--comment list 출력-->
-	<div id="commentList">
-		
+	<div>
+		<table id="commentList" border="1" class="table table-hover">
+
+		</table>
 	</div>
+	<button type="button" id="cmtmore" class="btn btn-dark">더보기</button>
 	<!--Comment list 끝-->
 
+	<!--comment 수정 모달-->
+	<div>
+		<!-- Button trigger modal -->
+		<button type="button" id="upCmt" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateCmtModal">
+		댓글 수정
+		</button>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="updateCmtModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">내용</label>
+						<input type="text" class="form-control" id="recipient-name">
+					</div>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
 
-	<a href="./list.mg">리스트 보기</a>
- 	<a href="./update.mg?booknum=${detail.booknum}">수정</a>
- 	<a href="./delete.mg?booknum=${detail.booknum}">삭제</a>
-	<c:if test = "${not empty sessionScope.member }">
-	<a href="../bankAccount/add.mg?booknum=${detail.booknum}">가입하기</a>
-	</c:if>
+
+</div>
+</section>
+
+
 	<script src="/resources/js/bankbookComment.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 </body>
 </html>

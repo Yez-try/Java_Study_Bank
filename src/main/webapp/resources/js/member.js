@@ -227,13 +227,7 @@ function joinjs(){
             email.focus()
             emailCheck = false
         }else{
-            const regex = /\d{3}-\d{4}-\d{4}/;
-            if(!regex.test(t)){
-                msg = "000-0000-0000형식으로 입력해주세요"
-                nameCheck = false
-            }else{
-                phoneCheck = true
-            }
+
         }
         lemail.innerText= msg
     })
@@ -251,7 +245,7 @@ function joinjs(){
             const regex = /\d{3}-\d{4}-\d{4}/;
             if(!regex.test(t)){
                 msg = "000-0000-0000형식으로 입력해주세요"
-                nameCheck = false
+                phoneCheck = false
             }else{
                 phoneCheck = true
             }

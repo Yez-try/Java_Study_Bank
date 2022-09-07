@@ -1,7 +1,9 @@
 package com.iu.start.bankbook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.start.util.CommentPager;
-import com.iu.start.util.Pager;
 
 @Controller
 @RequestMapping(value = "/bankbook/*")
@@ -26,10 +27,19 @@ public class BankBookController {
 	@Autowired
 	private BankBookService service;
 	
+	@PostMapping("commentDelete")
+	@ResponseBody
+	public int cmtDelete(Long num) throws Exception {
+		System.out.println("commentDelete 실행");
+
+		int result = service.delCmt(num);
+		
+		return result;
+	}
 	
 	@GetMapping("commentList")
 	@ResponseBody
-	public List<BankBookCommentDTO> getCommentList(CommentPager pager/*pager내에 page와 booknum이 들어있음*/) throws Exception{
+	public Map<String, Object> getCommentList(CommentPager pager/*pager내에 page와 booknum이 들어있음*/) throws Exception{
 		System.out.println("commentList 실행");
 		//1. JSP에 출력하고 결과물을 응답으로 전송
 //		ModelAndView mv =  new ModelAndView();
@@ -45,7 +55,16 @@ public class BankBookController {
 		// pom.xml에  jackson-databind 패키지를 넣어준 후
 		// responseBody 어노테이션으로 바로 리턴
 		
-		return service.getCommentList(pager);
+		//pager의 총 페이지수로 return해주고 싶다. 근데 한개밖에 리턴을 모샣 ㅠ 어떻게 하지?
+		//map을 만들어보자
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<BankBookCommentDTO> ar = service.getCommentList(pager);
+		
+		map.put("list", ar);
+		map.put("pager", pager);
+		
+		return map;
 	}
 	
 	@PostMapping("commentAdd")

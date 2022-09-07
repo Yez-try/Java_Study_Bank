@@ -22,6 +22,18 @@ public class BankBookDAO implements BookDAO{
 	@Autowired
 	private SqlSession session;
 	
+	public int updateCmt(BankBookCommentDTO paramDTO) throws Exception{
+		return session.update(NAMESPACE+"updateCmt", paramDTO);
+	}
+	
+	public int delCmt(Long num)throws Exception{
+		return session.delete(NAMESPACE+"delCmt", num);
+	}
+	
+	public int getCmtTotal(CommentPager pg) throws Exception{
+		return session.selectOne(NAMESPACE+"getCmtTotal",pg);
+	}
+	
 	public List<BankBookCommentDTO> getCommentList(CommentPager pager) throws Exception{
 		return session.selectList(NAMESPACE+"getCommentList", pager);
 	}
