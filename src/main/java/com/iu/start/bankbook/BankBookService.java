@@ -27,9 +27,6 @@ public class BankBookService {
 		
 		pager.calNum(totalcnt);
 		
-		System.out.println("startNum");
-		System.out.println("lastNum");
-		
 		return dao.getCommentList(pager);
 	}
 	

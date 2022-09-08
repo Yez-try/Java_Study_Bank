@@ -1,7 +1,8 @@
 const commentbtn = document.querySelector("#commentbtn");
 const commentList = document.querySelector("#commentList");
 const cmtmore = document.querySelector("#cmtmore");
-const upCmt = document.querySelector("#update")
+const upNum = document.getElementById("upNum")
+
 
 let cmtPage = 1;
 getCommentList();
@@ -116,6 +117,8 @@ function getCommentList(){
                 tr.appendChild(td)
 
                 td = document.createElement("td")
+                //날짜 포맷 변경
+                let dt = new Date(cmtlist[i].regDate)
                 tt = document.createTextNode(cmtlist[i].regDate)
 
                 td.appendChild(tt)
@@ -187,15 +190,19 @@ commentList.addEventListener("click",function(event){
         }
     }
     else if(event.target.className =="update"){
-        alert("수정")
-
-        console.log(upCmt)
-        upCmt.click();
-
         let con = event.target.previousSibling.previousSibling.previousSibling
         let conV = con.innerHTML;
+        //1. 댓글이 보이는 란에 textarea추가해 내용 가져오기
+        // con.innerHTML = "<textarea>"+conV+"</textarea>"
 
-        con.innerHTML = "<textarea>"+conV+"</textarea>"
+        //2. 수정 모달창 띄우기
+        document.querySelector("#upCmt").click();
+
+        const upContents = document.querySelector("#upContents")
+        upContents.innerHTML = conV;
+
+        //값 가져오기
+        upNum.value = event.target.getAttribute("data-num");
 
     }
 })
@@ -221,3 +228,26 @@ function cmtDel(num){
         }
     })
 }
+
+//----------Modal update button Click------------------
+let upSave = document.querySelector("#upSave")
+
+upSave.addEventListener("click", function(){
+    console.log( upContents.value + upNum.value)
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST","./commentUpdate");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xhttp.send("num="+upNum.value+"&contents="+upContents.value)
+    xhttp.addEventListener("readystatechange", function(){
+        console.log(this.readyState+this.status)
+        if(this.readyState==4 && this.status==200){
+            if(xhttp.responseText.trim()=="1"){
+                alert("수정성공")
+            }else{
+                alert("수정실패")
+            }
+        }
+    })
+
+})

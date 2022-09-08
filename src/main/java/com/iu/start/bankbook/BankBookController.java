@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.start.bankMembers.BankMembersDTO;
 import com.iu.start.util.CommentPager;
 
 @Controller
@@ -26,6 +28,15 @@ public class BankBookController {
 	
 	@Autowired
 	private BankBookService service;
+	
+	@PostMapping("commentUpdate")
+	@ResponseBody
+	public int cmtUpdate(BankBookCommentDTO dto)throws Exception{
+		
+		int result = service.updateCmt(dto);
+		
+		return result;
+	}
 	
 	@PostMapping("commentDelete")
 	@ResponseBody
@@ -40,7 +51,6 @@ public class BankBookController {
 	@GetMapping("commentList")
 	@ResponseBody
 	public Map<String, Object> getCommentList(CommentPager pager/*pager내에 page와 booknum이 들어있음*/) throws Exception{
-		System.out.println("commentList 실행");
 		//1. JSP에 출력하고 결과물을 응답으로 전송
 //		ModelAndView mv =  new ModelAndView();
 //		List<BankBookCommentDTO> ar = service.getCommentList(pager);
@@ -165,10 +175,19 @@ public class BankBookController {
 	}
 	
 	@RequestMapping(value = "add.mg", method = RequestMethod.GET)
-	public ModelAndView add() {
+	public ModelAndView add(HttpSession session) {		
+		BankMembersDTO bankMembersDTO = (BankMembersDTO)session.getAttribute("member");
+		String vname = "redirect:../member/login.mg";
+		if(bankMembersDTO!=null) {
+			vname = "bankbook/add";
+		}else {
+			vname = "redirect:../member/login.mg";
+		}
+		
 		ModelAndView mv = new ModelAndView(); //modelandview를 리턴해도 된다.
-		mv.setViewName("bankbook/add"); //경로명을 꼭 담아주어야한다.
-		System.out.println("상품등록폼 modelandview리턴해서 실행");
+		mv.setViewName(vname); //경로명을 꼭 담아주어야한다.
+		
+		
 		
 		return mv;
 	}

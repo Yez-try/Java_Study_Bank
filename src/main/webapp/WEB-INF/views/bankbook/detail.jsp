@@ -49,7 +49,7 @@
    <c:if test = "${not empty sessionScope.member }">
    <a href="../bankAccount/add.mg?booknum=${detail.booknum}">가입하기</a>
    </c:if>
-	<!--Comment 영역-->
+	<!--Comment 작성 영역-->
 	<div class="row">
 		<!--form으로 보내면 동기방식, 페이지를 보내버리므로 지금은 form 태그나 name태그가 필요없다-->
 			<div class="mb-3">
@@ -64,11 +64,14 @@
 				<button type="button" id="commentbtn" data-booknum="${detail.booknum}">댓글작성</button>
 			</div>
 	</div>
-	<!--Comment 끝-->
+	<!--Comment 작성 끝-->
+
 	<!--comment list 출력-->
 	<div>
-		<table id="commentList" border="1" class="table table-hover">
+		<table border="1" class="table table-secondary table-hover">
+			<tbody id="commentList">
 
+			</tbody>
 		</table>
 	</div>
 	<button type="button" id="cmtmore" class="btn btn-dark">더보기</button>
@@ -77,7 +80,7 @@
 	<!--comment 수정 모달-->
 	<div>
 		<!-- Button trigger modal -->
-		<button type="button" id="upCmt" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateCmtModal">
+		<button type="button" hidden id="upCmt" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateCmtModal">
 		댓글 수정
 		</button>
 	
@@ -90,14 +93,17 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div class="mb-3">
-						<label for="recipient-name" class="col-form-label">내용</label>
-						<input type="text" class="form-control" id="recipient-name">
-					</div>
+					<form>
+						<div class="mb-3">
+							<input type="hidden" id="upNum">
+							<label for="recipient-name" class="col-form-label">내용</label>
+							<textarea class="form-control" id="upContents" rows="3"></textarea>
+						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-primary" id="upSave">Save changes</button>
 				</div>
 			</div>
 			</div>
