@@ -28,19 +28,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletResponse response) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		//쿠키를 만들어보자
-		Cookie cookie = new Cookie("hi","hello");
-		cookie.setMaxAge(600); //초단위를 의미함
-		response.addCookie(cookie);
+		System.out.println("home");
 		
 		
 		return "home";
