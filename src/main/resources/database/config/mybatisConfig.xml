@@ -6,6 +6,7 @@
   <configuration>
   	<typeAliases>
  		<typeAlias type="com.iu.start.bankMembers.BankMembersDTO" alias="BankMembersDTO"/>
+ 		<typeAlias type="com.iu.start.bankMembers.RoleDTO" alias="RoleDTO"/>
  		<typeAlias type="com.iu.start.bankbook.BankBookDTO" alias="BankBookDTO"/>
  		<typeAlias type="com.iu.start.bankAccount.BankAccountDTO" alias="BankAccountDTO"/>
  		<typeAlias type="java.lang.String" alias="String"/>

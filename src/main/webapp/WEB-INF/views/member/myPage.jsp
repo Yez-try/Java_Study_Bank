@@ -27,6 +27,8 @@
 	이름 : ${dto.name}<br>
 	이메일 : ${dto.email }<br>
 	전화번호 : ${dto.phone}<br>
+	당신은 ${member.roleDTOs.get(0).roleName}등급입니다.<br>
+	당신은 ${member.roleDTOs["0"].roleName}등급입니다.<br><!-- 배열형식으로 쓸때는 문자열로 인덱스 번호를 넣어준다. -->
 	
 	</section>
 

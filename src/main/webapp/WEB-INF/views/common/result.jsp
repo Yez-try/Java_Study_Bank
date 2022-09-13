@@ -11,7 +11,7 @@
 <h1>common result 페이지</h1>
 
 <script type="text/javascript">
-	let result = '${result}';
+
 	let message = '${message}';
 	alert(message);
 	location.href="${url}";

@@ -26,9 +26,11 @@
 	<!-- Interceptor설정 -->
 	<!-- Interceptor 객체 생성 -->
 	<beans:bean class="com.iu.start.interceptor.TestInterceptor" id="testInterceptor"></beans:bean>
+	<beans:bean class="com.iu.start.interceptor.AdminCheckInterceptor" id="adminCheckInterceptor"></beans:bean>
 	
 	<!-- URL - Interceptor 맵핑 -->
 	<interceptors>
+
 		<interceptor>
 			<!-- mapping과 beans의 순서를 꼭 지켜줄 것 -->
 			<!-- 루트로 시작하는 모든 경로를 interceptor를 거치도록 한다. -->
@@ -38,9 +40,13 @@
 		</interceptor>
 		<interceptor>
 			<mapping path="/qna/*"/>
+			<mapping path="/notice/*"/>
 			<mapping path="/member/myPage.mg"/>
 			<!-- exclude-mapping의 주소는 제외하고 -->
 			<exclude-mapping path="/qna/list.mg"/>
+			<exclude-mapping path="/qna/detail.mg"/>
+			<exclude-mapping path="/notice/list.mg"/>
+			<exclude-mapping path="/notice/detail.mg"/>
 			<beans:bean class="com.iu.start.interceptor.memberInterceptor" id="memberInterceptor"></beans:bean>
 		</interceptor>
 		<interceptor>
@@ -48,7 +54,14 @@
 			<mapping path="/notice/update.mg"/>
 			<beans:bean class="com.iu.start.interceptor.WriterCheckInterceptor" id="writerCheckInterceptor"></beans:bean>
 		</interceptor>
-		
+	
+		<!-- 운영자 등급 체크 -->
+		<interceptor>
+			<mapping path="/notice/**"></mapping>
+			<exclude-mapping path="/notice/list.mg"/>
+			<exclude-mapping path="/notice/detail.mg"/>
+			<beans:ref bean = "adminCheckInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 </beans:beans>

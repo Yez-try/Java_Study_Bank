@@ -10,9 +10,27 @@
 	<insert id="setAddFile" parameterType="BankMembersFileDTO">
 		insert into MEMBERFILE values (file_seq.nextval, #{fileName}, #{oriName}, #{userName})
 	</insert>
-	<select id="getLogin" parameterType="BankMembersDTO" resultType="BankMembersDTO"> <!-- mybatisConfig파일에 넣어주면된다. -->
-		select id, name from bankmembers where id=#{id} and pw=#{pw}
+	
+	<select id="getLogin" parameterType="BankMembersDTO" resultMap="getLoginResult"> <!-- mybatisConfig파일에 넣어주면된다. -->
+		select id, name, rolename
+		from bankmembers BM
+		    left join member_role MR
+		    on BM.id = MR.username
+		    left join role R
+		    on MR.rolenum = R.rolenum
+		where id = #{id} and pw=#{pw}
+		order by R.rolenum asc
 	</select>
+	<resultMap type="BankMembersDTO" id="getLoginResult">
+		<id column="ID" property="id"/>
+		<result column="NAME" property="name"/>
+		
+		<collection property="roleDTOs" javaType="List" ofType="RoleDTO">
+			<id column="ROLENUM" property="roleNum"/>
+			<result column="ROLENAME" property="roleName"/>
+		</collection>
+		
+	</resultMap>
 	
 	<select id="getMine" parameterType="BankMembersDTO" resultType="BankMembersDTO">
 		select id,name,pw,email,phone,lv from bankmembers where id=#{id}
@@ -26,7 +44,6 @@
 		left join BANKBOOK bb using (BOOKNUM)
 		WHERE bm.ID=#{id}
 	</select>
-	
 	<resultMap type="BankMembersDTO" id="getMyPageResult">
 		<id column="ID" property="id"/>
 		<result column="NAME" property="name"/>
