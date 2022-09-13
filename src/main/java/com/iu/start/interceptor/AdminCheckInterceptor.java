@@ -33,7 +33,6 @@ public class AdminCheckInterceptor extends HandlerInterceptorAdapter{
 		}
 		//권한이 없을때 (forward 방식으로 보내보자 )
 		if(!chk) {
-			System.out.println(chk+"메세지");
 			request.setAttribute("message", "권한이 없습니다");
 			request.setAttribute("url", "../../../../../");
 			
