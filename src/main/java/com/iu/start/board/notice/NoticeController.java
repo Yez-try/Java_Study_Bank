@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -112,5 +113,23 @@ public class NoticeController {
 		return "redirect:./list.mg";
 	}
 	
-
+	//에러처리 메서드
+	@ExceptionHandler(NullPointerException.class)
+	public ModelAndView exceptionTest1() {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("errors/error_404");
+		
+		return mv;
+	}
+	
+	//위에서 널포인터로 못받은 exception은 여기서 받도록
+	@ExceptionHandler(Exception.class)
+	public ModelAndView exceptionTest2() {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("errors/error_404");
+		
+		return mv;
+	}
 }
