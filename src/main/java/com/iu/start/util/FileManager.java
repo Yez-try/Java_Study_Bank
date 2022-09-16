@@ -9,11 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iu.start.file.FileDTO;
+
 @Component
 public class FileManager {
 	
 //	@Autowired
 //	private ServletContext;
+	
+	//HDD에서 파일 삭제
+	public boolean deleteFile(ServletContext servletContext/*실제경로 받으려고*/, String path, FileDTO dto) throws Exception{
+		String realPath = servletContext.getRealPath(path);
+		File file = new File(realPath, dto.getFileName()); //파일의 정보를 가진 File객체
+		
+		boolean result = file.delete(); //해당 파일을 지우자
+		
+		return result;
+	}
 	
 	//save
 	public String saveFile(ServletContext servletContext, String path, MultipartFile multipartfile) throws Exception{

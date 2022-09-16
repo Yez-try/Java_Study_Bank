@@ -52,6 +52,7 @@ public class MemberController {
 		
 		dto = service.getMine(dto);
 		mv.addObject("dto",dto);
+		mv.setViewName("member/myPage");
 		
 		return mv;
 	}
