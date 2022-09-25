@@ -17,6 +17,7 @@ public class FileManager {
 	
 	//save
 	public String saveFile(ServletContext servletContext, String path, MultipartFile multipartfile) throws Exception{
+		System.out.println("save");
 		//1. 실제 경로
 		String realPath = servletContext.getRealPath(path);
 		System.out.println(realPath);

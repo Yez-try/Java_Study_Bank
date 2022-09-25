@@ -9,6 +9,35 @@ function addjs(){
 
     let countfiles = 0;
     let idx = 0;
+
+    const file = document.getElementById("file");
+    
+    file.addEventListener("change", function(){
+        let data = new FormData();
+        data.append("file",file.files[0])
+        data.append("path","test")
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "http://localhost:8085/files/uploadFile",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log(data)
+                alert('success')
+            },
+            error: function (e) {
+                
+                alert('fail');
+            }
+        });
+
+
+    })
     
     fileAdd.addEventListener("click",function(){
         if(countfiles<5){

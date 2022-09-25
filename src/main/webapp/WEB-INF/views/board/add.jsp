@@ -28,6 +28,7 @@
 	<hr>
 		<button type = "button" id="fileAdd">파일 추가</button>
 	<div id="addFiles">
+		<input type="file" id="file" name="file" class="form-control">
 		<!-- 파일 추가 버튼 생성 영역 -->
 	</div>
 	내용 입력 <br>
