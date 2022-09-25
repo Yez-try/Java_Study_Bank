@@ -10,17 +10,17 @@ function addjs(){
     let countfiles = 0;
     let idx = 0;
 
-    const file = document.getElementById("file");
     
     file.addEventListener("change", function(){
+        const file = document.getElementById("file");
         let data = new FormData();
         data.append("file",file.files[0])
-        data.append("path","test")
+        data.append("path","resources/test")
 
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
-            url: "http://localhost:8085/files/uploadFile",
+            url: "http://localhost:8085/uploadFile",
             data: data,
             processData: false,
             contentType: false,
@@ -28,6 +28,7 @@ function addjs(){
             timeout: 600000,
             success: function (data) {
                 console.log(data)
+                console.log(file.files[0].name)
                 alert('success')
             },
             error: function (e) {
@@ -35,8 +36,6 @@ function addjs(){
                 alert('fail');
             }
         });
-
-
     })
     
     fileAdd.addEventListener("click",function(){
